@@ -1,4 +1,4 @@
-package main.java.com.andy.expensetracker;
+package com.andy.expensetracker;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

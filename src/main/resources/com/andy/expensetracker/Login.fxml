@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.andy.expensetracker.Login.LoginController">
+    <children>
+        <Label fx:id="isConnected" layoutX="52.0" layoutY="60.0" prefHeight="53.0" prefWidth="129.0" text="Status" textFill="#a35d5d" AnchorPane.bottomAnchor="187.0" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="119.0" AnchorPane.topAnchor="60.0">
+            <font>
+                <Font size="36.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

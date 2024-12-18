@@ -4,11 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="110aba21-2191-4ca8-a3dc-6fe61fcf0a74" name="Changes" comment="init commit" />
+    <list default="true" id="110aba21-2191-4ca8-a3dc-6fe61fcf0a74" name="Changes" comment="init commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Database/SqliteConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Login/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Login/LoginModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/HelloApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/HelloApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/hello-view.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="FxmlFile" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -29,10 +47,11 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/andyh/IdeaProjects",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "last_opened_file_path": "C:/Program Files/java/jdbc/sqlite-jdbc-3.47.1.0.jar",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.JavaFX"
   }
 }]]></component>
   <component name="RunManager">

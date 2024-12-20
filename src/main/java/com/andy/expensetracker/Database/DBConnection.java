@@ -5,51 +5,57 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 
-public class SqliteConnection {
+public class DBConnection {
     private static final String DB_PATH = "Expense.db";
+    public static Connection connection;
 
-    public static void Initialize(){
+    public DBConnection(){
         File dbfile=new File(DB_PATH);
         if(!dbfile.exists()){
             try{
+                Class.forName("org.sqlite.JDBC");
+                connection=DriverManager.getConnection("jdbc:sqlite:"+DB_PATH);
                 createDatabase();
 
             }catch(Exception e){
                 e.printStackTrace();
             }
 
+        }else{
+            try{
+                Class.forName("org.sqlite.JDBC");
+                connection=DriverManager.getConnection("jdbc:sqlite:"+DB_PATH);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         }
+
     }
 
-    public static Connection connector(){
-        Initialize();
-        try{
-            Class.forName("org.sqlite.JDBC");
-            Connection conn=DriverManager.getConnection("jdbc:sqlite:"+DB_PATH);
-            return conn;
-        }
-        catch (Exception e){
-            return null;
-        }
+    public Connection getConnection(){
+        return connection;
     }
 
     private static void createDatabase() throws Exception {
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + DB_PATH)) {
-            if (conn != null) {
+        try {
+            if (connection != null) {
                 System.out.println("New database created at " + DB_PATH);
                 String localDir = System.getProperty("user.dir")+"\\src\\main\\java\\com\\andy\\expensetracker\\Database\\";
                 String SQL_FILE = localDir+"initializeDB.sql";
-                Statement stmt = conn.createStatement();
-                executeSqlFile(SQL_FILE, conn);
+                Statement stmt = connection.createStatement();
+                executeSqlFile(SQL_FILE);
                 System.out.println("Tables are ready.");
 
             }else{
                 System.out.println("Tables are ready.");
             }
         }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
-    private static void executeSqlFile(String filePath, Connection conn) throws IOException {
+    private static void executeSqlFile(String filePath) throws IOException {
         StringBuilder sqlQuery = new StringBuilder();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -59,7 +65,7 @@ public class SqliteConnection {
             }
         }
 
-        try (Statement stmt = conn.createStatement()) {
+        try (Statement stmt = connection.createStatement()) {
             stmt.executeUpdate(sqlQuery.toString());
             System.out.println("SQL File executed Successfully");
         } catch (Exception e) {

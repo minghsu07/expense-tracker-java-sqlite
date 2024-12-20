@@ -11,6 +11,7 @@ target/
 *.iws
 *.iml
 *.ipr
+Expense.db
 
 ### Eclipse ###
 .apt_generated

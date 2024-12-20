@@ -1,4 +1,5 @@
 package com.andy.expensetracker.Login;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -13,14 +14,12 @@ public class LoginController implements Initializable {
     public LoginModel loginModel=new LoginModel();
 
     @FXML
-    private Label isConnected;
+    void handleLoginClicked(ActionEvent event) {
+
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(loginModel.isDbConnected()){
-            isConnected.setText("Connected");
-        }else{
-            isConnected.setText("Not connected");
-        }
+
     }
 }

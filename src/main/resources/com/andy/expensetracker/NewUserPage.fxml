@@ -6,12 +6,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="540.0" maxWidth="880.0" minHeight="540.0" minWidth="880.0" prefHeight="540.0" prefWidth="880.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.andy.expensetracker.Login.LoginController">
+<AnchorPane maxHeight="540.0" maxWidth="880.0" minHeight="540.0" minWidth="880.0" prefHeight="540.0" prefWidth="880.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.andy.expensetracker.Login.NewUserController">
     <children>
         <AnchorPane prefHeight="540.0" prefWidth="360.0" style="-fx-background-color: #9FD48F;">
             <children>
@@ -22,22 +24,41 @@
                 </Label>
             </children>
         </AnchorPane>
-      <VBox layoutX="360.0" layoutY="52.0" prefHeight="303.0" prefWidth="491.0">
+      <HBox alignment="CENTER_RIGHT" layoutX="359.0" prefHeight="80.0" prefWidth="520.0">
          <children>
-            <Label text="User Login">
+            <Button mnemonicParsing="false" onAction="#handleHomeClicked" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="56.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../OneDrive/Desktop/Centennial/icons/home.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets right="20.0" top="20.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </HBox>
+      <VBox layoutX="360.0" layoutY="67.0" prefHeight="373.0" prefWidth="520.0">
+         <children>
+            <Label text="New User">
                <font>
                   <Font name="Cambria Bold" size="32.0" />
                </font>
                <VBox.margin>
-                  <Insets />
+                  <Insets top="10.0" />
                </VBox.margin>
             </Label>
-            <Label text="Account:">
+            <Label text="Account Name:">
                <font>
                   <Font name="Cambria Bold" size="20.0" />
                </font>
                <VBox.margin>
-                  <Insets top="50.0" />
+                  <Insets top="30.0" />
                </VBox.margin>
             </Label>
             <TextField fx:id="Username" maxHeight="30.0" maxWidth="280.0" prefHeight="30.0" prefWidth="280.0">
@@ -53,10 +74,23 @@
                   <Font name="Cambria Bold" size="20.0" />
                </font>
                <VBox.margin>
-                  <Insets top="50.0" />
+                  <Insets top="20.0" />
                </VBox.margin>
             </Label>
             <PasswordField fx:id="Password" maxHeight="30.0" maxWidth="280.0" prefHeight="30.0" prefWidth="280.0">
+               <font>
+                  <Font name="Cambria" size="18.0" />
+               </font>
+            </PasswordField>
+            <Label text="Retry Password:">
+               <font>
+                  <Font name="Cambria Bold" size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <PasswordField fx:id="RetryPasswd" maxHeight="30.0" maxWidth="280.0" prefHeight="30.0" prefWidth="280.0">
                <font>
                   <Font name="Cambria" size="18.0" />
                </font>
@@ -66,26 +100,12 @@
             <Insets left="130.0" />
          </padding>
       </VBox>
-      <HBox alignment="TOP_CENTER" layoutX="360.0" layoutY="323.0" prefHeight="100.0" prefWidth="518.0">
+      <VBox alignment="TOP_CENTER" layoutX="360.0" layoutY="366.0" prefHeight="128.0" prefWidth="520.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleLoginClicked" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #65B25E; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-padding: 10,30;" text="Log in" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#handleSignupClicked" style="-fx-background-color: #65B25E; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-padding: 10,30;" text="Sign up" textFill="WHITE">
                <font>
                   <Font name="Cambria" size="24.0" />
                </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <HBox.margin>
-                  <Insets right="30.0" />
-               </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#handleSignupClicked" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #65B25E; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Sign up" textFill="WHITE">
-               <font>
-                  <Font name="Cambria" size="24.0" />
-               </font>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -94,6 +114,6 @@
          <padding>
             <Insets top="30.0" />
          </padding>
-      </HBox>
+      </VBox>
     </children>
 </AnchorPane>

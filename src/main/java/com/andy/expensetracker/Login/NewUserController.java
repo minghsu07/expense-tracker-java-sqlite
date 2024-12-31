@@ -22,6 +22,10 @@ public class NewUserController {
     private Parent root;
     private LoginModel loginmodel=new LoginModel();
 
+    public NewUserController(Stage stage){
+        this.stage=stage;
+    }
+
     @FXML
     private TextField Username;
     @FXML
@@ -35,9 +39,10 @@ public class NewUserController {
 
     @FXML
     void handleHomeClicked(ActionEvent event) throws IOException {
-        root=FXMLLoader.load(Main.class.getResource("Login.fxml"));
-
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        FXMLLoader loader=new FXMLLoader(Main.class.getResource("Login.fxml"));
+        LoginController loginController=new LoginController(stage);
+        loader.setController(loginController);
+        root=loader.load();
         scene=new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -61,9 +66,10 @@ public class NewUserController {
             alert.show();
         }else{
             if(loginmodel.Singup(username,passwd)){
-                root=FXMLLoader.load(Main.class.getResource("Login.fxml"));
-
-                stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+                FXMLLoader loader=new FXMLLoader(Main.class.getResource("Login.fxml"));
+                LoginController loginController=new LoginController(stage);
+                loader.setController(loginController);
+                root=loader.load();
                 scene=new Scene(root);
                 stage.setScene(scene);
                 stage.show();

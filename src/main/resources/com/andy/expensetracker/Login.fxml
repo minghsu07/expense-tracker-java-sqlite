@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="540.0" maxWidth="880.0" minHeight="540.0" minWidth="880.0" prefHeight="540.0" prefWidth="880.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.andy.expensetracker.Login.LoginController">
+<AnchorPane maxHeight="540.0" maxWidth="880.0" minHeight="540.0" minWidth="880.0" prefHeight="540.0" prefWidth="880.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" >
     <children>
         <AnchorPane prefHeight="540.0" prefWidth="360.0" style="-fx-background-color: #9FD48F;">
             <children>

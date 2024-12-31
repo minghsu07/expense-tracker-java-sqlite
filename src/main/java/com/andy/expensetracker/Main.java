@@ -1,6 +1,7 @@
 package com.andy.expensetracker;
 
 
+import com.andy.expensetracker.Login.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +15,8 @@ public class Main extends Application {
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
+        LoginController loginController=new LoginController(stage);
+        fxmlLoader.setController(loginController);
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("ExpenseTracker");
         stage.setResizable(false);

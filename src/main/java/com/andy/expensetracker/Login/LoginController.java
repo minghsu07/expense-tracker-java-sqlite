@@ -1,4 +1,5 @@
 package com.andy.expensetracker.Login;
+import com.andy.expensetracker.Expense.MainController;
 import com.andy.expensetracker.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,17 +28,24 @@ public class LoginController  {
 
     public LoginModel loginModel=new LoginModel();
 
+    public LoginController(Stage stage){
+        this.stage=stage;
+    }
+
     @FXML
     private TextField Username;
+
 
     @FXML
     private PasswordField Password;
 
     @FXML
     void handleSignupClicked(ActionEvent event) throws IOException {
-        root=FXMLLoader.load(Main.class.getResource("NewUserPage.fxml"));
-
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        FXMLLoader loader=new FXMLLoader(Main.class.getResource("NewUserPage.fxml"));
+        NewUserController newUserController=new NewUserController(stage);
+        loader.setController(newUserController);
+        root=loader.load();
+//        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -60,7 +68,22 @@ public class LoginController  {
             loginModel.setUsername(username);
             System.out.println("USERID: "+loginModel.getID());
             //go to main page
+            FXMLLoader loader=new FXMLLoader(Main.class.getResource("Main.fxml"));
+            MainController mainController=new MainController(loginModel);
+            loader.setController(mainController);
+            root=loader.load();
+
+//            MainController mainController=loader.getController();
+//            stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+            scene=new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         }
 
+    }
+
+    public void initialize(){
+        Username.setText("andy");
+        Password.setText("andy");
     }
 }

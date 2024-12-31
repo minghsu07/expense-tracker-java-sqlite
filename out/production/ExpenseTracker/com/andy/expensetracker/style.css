@@ -1,0 +1,10 @@
+.column-style-left{
+    -fx-alignment: "CENTER-RIGHT";
+}
+.column-style-center{
+    -fx-alignment: "CENTER";
+}
+.column-font-style{
+    -fx-font-size: 14;
+    /*-fx-font-family: "Cambria";*/
+}

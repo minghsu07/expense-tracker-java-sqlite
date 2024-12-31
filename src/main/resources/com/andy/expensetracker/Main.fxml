@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="650.0" maxWidth="1070.0" prefHeight="650.0" prefWidth="1070.0" style="-fx-background-color: CAEDCA;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="25.0" layoutY="36.0" prefHeight="570.0" prefWidth="830.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20;">
+         <children>
+            <HBox alignment="TOP_CENTER" prefWidth="200.0">
+               <children>
+                  <Label text="Year:">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="Combo_Year" prefHeight="25.0" prefWidth="132.0">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </ComboBox>
+                  <Label text="Month:">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="Combo_Month" prefHeight="25.0" prefWidth="132.0">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </ComboBox>
+                  <Label text="Category:">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="Combo_Category" prefHeight="25.0" prefWidth="175.0">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </HBox>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="410.0" minWidth="10.0" prefWidth="148.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="670.0" minWidth="0.0" prefWidth="479.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="670.0" minWidth="10.0" prefWidth="189.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#SearchClicked" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #ED3818; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Search" textFill="WHITE" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+                     <children>
+                        <Label text="Total Amount" textFill="#433d3d">
+                           <font>
+                              <Font name="Cambria" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="TotalAmount" text="\$">
+                           <font>
+                              <Font name="Cambria Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </GridPane>
+            <TableView fx:id="ExpenseTable" prefHeight="421.0" prefWidth="830.0">
+              <columns>
+                <TableColumn fx:id="col_Item" prefWidth="193.0" resizable="false" text="Item" />
+                <TableColumn fx:id="col_Category" prefWidth="195.0" resizable="false" text="Category" />
+                  <TableColumn fx:id="col_Date" prefWidth="148.0" resizable="false" text="Date" />
+                  <TableColumn fx:id="col_Amount" prefWidth="155.0" resizable="false" text="Amount" />
+              </columns>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </TableView>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="870.0" layoutY="36.0" prefHeight="570.0" prefWidth="189.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="80.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../OneDrive/Desktop/Centennial/icons/userIcon.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="UserName" alignment="TOP_CENTER">
+                     <font>
+                        <Font name="Cambria Bold" size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox alignment="CENTER" prefHeight="262.0" prefWidth="189.0" style="-fx-background-color: #FCF9F9;">
+               <VBox.margin>
+                  <Insets top="150.0" />
+               </VBox.margin>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#CurrentMonClicked" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #239341; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Current Month" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #239341; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="New Expense" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </VBox>
+            <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #EDBD3A; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Log out" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

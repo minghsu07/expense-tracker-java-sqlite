@@ -2,6 +2,8 @@ package com.andy.expensetracker.Login;
 
 import com.andy.expensetracker.Database.DBConnection;
 import com.andy.expensetracker.Database.SqliteConnection;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.control.Alert;
 
 import java.sql.*;
@@ -37,7 +39,16 @@ public class LoginModel {
     public void setID(int ID) {
         this.ID = ID;
     }
-
+//    private final StringProperty username=new SimpleStringProperty();
+//    public StringProperty userProperty(){
+//        return username;
+//    }
+//    public final String getUsername(){
+//        return userProperty().get();
+//    }
+//    public final void setUsername(String name){
+//        userProperty().set(name);
+//    }
     private String Username;
     public String getUsername() {
         return Username;

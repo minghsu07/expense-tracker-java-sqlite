@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -33,6 +34,10 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     private LoginModel Login;
     private final LocalDate localdate=LocalDate.now();
@@ -59,9 +64,9 @@ public class MainController implements Initializable {
 
     private ObservableList<ExpenseModel> data;
 
-    public MainController(LoginModel login){
+    public MainController(Stage stage,LoginModel login){
         Login=login;
-
+        this.stage=stage;
     }
 
 
@@ -145,6 +150,27 @@ public class MainController implements Initializable {
         Combo_Year.setValue(String.valueOf(Cur_year));
         Combo_Month.setValue(String.valueOf(Cur_mon));
 
+    }
+
+    public void NewExpenseClicked(ActionEvent event) throws Exception{
+        FXMLLoader loader=new FXMLLoader(Main.class.getResource("NewExpense.fxml"));
+        NewExpense newExpense=new NewExpense(stage,Login);
+        loader.setController(newExpense);
+        root=loader.load();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void LogoutClicked(ActionEvent event) throws Exception{
+
+        FXMLLoader loader=new FXMLLoader(Main.class.getResource("Login.fxml"));
+        LoginController loginController=new LoginController(stage);
+        loader.setController(loginController);
+        root=loader.load();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     private ArrayList<String> Gen_Years(){

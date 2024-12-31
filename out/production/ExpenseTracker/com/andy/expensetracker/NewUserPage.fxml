@@ -13,37 +13,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="540.0" maxWidth="880.0" minHeight="540.0" minWidth="880.0" prefHeight="540.0" prefWidth="880.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane maxHeight="650.0" maxWidth="1070.0" minHeight="650.0" minWidth="1070.0" prefHeight="650.0" prefWidth="1070.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <AnchorPane prefHeight="540.0" prefWidth="360.0" style="-fx-background-color: #9FD48F;">
+        <AnchorPane prefHeight="650.0" prefWidth="450.0" style="-fx-background-color: #9FD48F;">
             <children>
-                <Label layoutX="40.0" layoutY="240.0" text="Expense Tracking System" textFill="WHITE">
+                <Label layoutX="85.0" layoutY="295.0" text="Expense Tracking System" textFill="WHITE">
                     <font>
                         <Font name="Cambria Bold" size="24.0" />
                     </font>
                 </Label>
             </children>
         </AnchorPane>
-      <HBox alignment="CENTER_RIGHT" layoutX="359.0" prefHeight="80.0" prefWidth="520.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#handleHomeClicked" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="56.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../../OneDrive/Desktop/Centennial/icons/home.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <HBox.margin>
-                  <Insets right="20.0" top="20.0" />
-               </HBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </HBox>
-      <VBox layoutX="360.0" layoutY="67.0" prefHeight="373.0" prefWidth="520.0">
+      <HBox alignment="CENTER_RIGHT" layoutX="359.0" prefHeight="80.0" prefWidth="520.0" />
+      <VBox layoutX="504.0" layoutY="91.0" prefHeight="373.0" prefWidth="520.0">
          <children>
             <Label text="New User">
                <font>
@@ -101,19 +83,29 @@
          </padding>
       </VBox>
       <VBox alignment="TOP_CENTER" layoutX="360.0" layoutY="366.0" prefHeight="128.0" prefWidth="520.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#handleSignupClicked" style="-fx-background-color: #65B25E; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-padding: 10,30;" text="Sign up" textFill="WHITE">
-               <font>
-                  <Font name="Cambria" size="24.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
          <padding>
             <Insets top="30.0" />
          </padding>
       </VBox>
+      <Button layoutX="710.0" layoutY="508.0" mnemonicParsing="false" onAction="#handleSignupClicked" style="-fx-background-color: #65B25E; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-padding: 10,30;" text="Sign up" textFill="WHITE">
+         <font>
+            <Font name="Cambria" size="24.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="972.0" layoutY="30.0" mnemonicParsing="false" onAction="#handleHomeClicked" style="-fx-background-color: transparent;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="56.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../OneDrive/Desktop/Centennial/icons/home.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
     </children>
 </AnchorPane>

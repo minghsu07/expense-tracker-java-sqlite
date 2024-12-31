@@ -33,7 +33,26 @@ public class DBConnection {
     }
 
     public Connection getConnection(){
+        if(!isDbConnected()){
+            try{
+                Class.forName("org.sqlite.JDBC");
+                File dbfile=new File(DB_PATH);
+                connection=DriverManager.getConnection("jdbc:sqlite:"+DB_PATH);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
         return connection;
+    }
+
+    public boolean isDbConnected(){
+        try{
+            return !connection.isClosed();
+        }
+        catch (Exception e){
+            return false;
+        }
     }
 
     private static void createDatabase() throws Exception {

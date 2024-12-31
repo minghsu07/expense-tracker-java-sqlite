@@ -69,7 +69,7 @@ public class LoginController  {
             System.out.println("USERID: "+loginModel.getID());
             //go to main page
             FXMLLoader loader=new FXMLLoader(Main.class.getResource("Main.fxml"));
-            MainController mainController=new MainController(loginModel);
+            MainController mainController=new MainController(stage,loginModel);
             loader.setController(mainController);
             root=loader.load();
 

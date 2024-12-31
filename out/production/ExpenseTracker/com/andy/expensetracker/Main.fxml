@@ -149,7 +149,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #239341; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="New Expense" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#NewExpenseClicked" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #239341; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="New Expense" textFill="WHITE">
                      <font>
                         <Font name="Cambria Bold" size="18.0" />
                      </font>
@@ -162,7 +162,7 @@
                   </Button>
                </children>
             </VBox>
-            <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #EDBD3A; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Log out" textFill="WHITE">
+            <Button  mnemonicParsing="false" onAction="#LogoutClicked" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #EDBD3A; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Log out" textFill="WHITE">
                <font>
                   <Font name="Cambria Bold" size="18.0" />
                </font>

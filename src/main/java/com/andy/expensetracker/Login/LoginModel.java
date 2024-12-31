@@ -66,14 +66,7 @@ public class LoginModel {
         SQLConn=new DBConnection();
     }
 
-    public boolean isDbConnected(){
-        try{
-            return !SQLConn.getConnection().isClosed();
-        }
-        catch (Exception e){
-            return false;
-        }
-    }
+
 
     public boolean Singup(String username,String passwd){
 

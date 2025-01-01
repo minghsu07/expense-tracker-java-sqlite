@@ -1,26 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="ExpenseTracker:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="110aba21-2191-4ca8-a3dc-6fe61fcf0a74" name="Changes" comment="Added Login page">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/ExpenseTracker_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Expense.db" beforeDir="false" afterPath="$PROJECT_DIR$/Expense.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Database/DBConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Database/DBConnection.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Expense/MainController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Expense/MainController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Expense/MainController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Expense/MainController$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Expense/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Expense/MainController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Expense/NewExpense$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Expense/NewExpense$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Expense/NewExpense$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Expense/NewExpense$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Expense/NewExpense.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Expense/NewExpense.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Login/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Login/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Login/LoginModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Login/LoginModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Login/NewUserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Login/NewUserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/NewExpense.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/NewExpense.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/NewUserPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExpenseTracker/com/andy/expensetracker/NewUserPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Database/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Database/DBConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Expense/ExpenseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Expense/ExpenseModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Expense/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Expense/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Expense/NewExpense.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Expense/NewExpense.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Login/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Login/LoginModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Login/LoginModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Login/NewUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Login/NewUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/Login.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/NewExpense.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/NewExpense.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/NewUserPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/NewUserPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +49,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="module-info" />
         <option value="Class" />
       </list>
     </option>
@@ -48,25 +66,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.App.executor&quot;: &quot;Run&quot;,
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/andyh/IdeaProjects/ExpenseTracker/src/main/resources/com/andy/expensetracker&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.App.executor": "Run",
+    "Application.HelloApplication.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/andyh/IdeaProjects/ExpenseTracker/src/main/resources/com/andy/expensetracker",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.JavaFX"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\andyh\IdeaProjects\ExpenseTracker\src\main\resources\com\andy\expensetracker" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\andyh\IdeaProjects\ExpenseTracker\src\main\resources\com\andy\expensetracker\icons" />
       <recent name="C:\Users\andyh\IdeaProjects\ExpenseTracker\src\main\resources\com\andy\expensetracker" />
     </key>
   </component>

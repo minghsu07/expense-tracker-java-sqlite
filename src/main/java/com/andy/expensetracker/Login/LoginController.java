@@ -1,23 +1,17 @@
 package com.andy.expensetracker.Login;
 import com.andy.expensetracker.Expense.MainController;
-import com.andy.expensetracker.Main;
+import com.andy.expensetracker.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.sql.*;
-import java.util.ResourceBundle;
 
 
 public class LoginController  {
@@ -41,7 +35,7 @@ public class LoginController  {
 
     @FXML
     void handleSignupClicked(ActionEvent event) throws IOException {
-        FXMLLoader loader=new FXMLLoader(Main.class.getResource("NewUserPage.fxml"));
+        FXMLLoader loader=new FXMLLoader(App.class.getResource("NewUserPage.fxml"));
         NewUserController newUserController=new NewUserController(stage);
         loader.setController(newUserController);
         root=loader.load();
@@ -66,9 +60,9 @@ public class LoginController  {
         }else{
             loginModel.setID(userID);
             loginModel.setUsername(username);
-            System.out.println("USERID: "+loginModel.getID());
+//            System.out.println("USERID: "+loginModel.getID());
             //go to main page
-            FXMLLoader loader=new FXMLLoader(Main.class.getResource("Main.fxml"));
+            FXMLLoader loader=new FXMLLoader(App.class.getResource("Main.fxml"));
             MainController mainController=new MainController(stage,loginModel);
             loader.setController(mainController);
             root=loader.load();
@@ -83,7 +77,7 @@ public class LoginController  {
     }
 
     public void initialize(){
-        Username.setText("andy");
-        Password.setText("andy");
+//        Username.setText("andy");
+//        Password.setText("andy");
     }
 }

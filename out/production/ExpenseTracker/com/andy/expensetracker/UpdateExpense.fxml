@@ -10,6 +10,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -17,7 +18,7 @@
    <children>
       <VBox alignment="TOP_CENTER" layoutX="205.0" layoutY="39.0" prefHeight="589.0" prefWidth="660.0" style="-fx-background-color: #40A883; -fx-background-radius: 20;">
          <children>
-            <Label text="New Expense" textFill="WHITE">
+            <Label text="Update Expense" textFill="WHITE">
                <font>
                   <Font name="Cambria Bold" size="24.0" />
                </font>
@@ -73,14 +74,29 @@
                   <DatePicker fx:id="SelectedDate" maxHeight="40.0" maxWidth="400.0" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="400.0" />
                </children>
             </VBox>
-            <Button onAction="#Addclicked" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #EDBD3A;" text="Add" textFill="WHITE">
-               <font>
-                  <Font name="Cambria Bold" size="18.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="40.0" />
-               </VBox.margin>
-            </Button>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#Updateclicked" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #EDBD3A;" text="Update" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#DeleteClicked" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #EDBD3A;" text="Delete" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets left="100.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </VBox>
       <Button layoutX="970.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleHomeClicked" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="565.0" AnchorPane.leftAnchor="970.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="24.0">

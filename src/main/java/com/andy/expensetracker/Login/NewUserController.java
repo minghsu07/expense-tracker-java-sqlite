@@ -1,10 +1,9 @@
 package com.andy.expensetracker.Login;
 
-import com.andy.expensetracker.Main;
+import com.andy.expensetracker.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -14,7 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.*;
 
 public class NewUserController {
     private Scene scene;
@@ -39,7 +37,7 @@ public class NewUserController {
 
     @FXML
     void handleHomeClicked(ActionEvent event) throws IOException {
-        FXMLLoader loader=new FXMLLoader(Main.class.getResource("Login.fxml"));
+        FXMLLoader loader=new FXMLLoader(App.class.getResource("Login.fxml"));
         LoginController loginController=new LoginController(stage);
         loader.setController(loginController);
         root=loader.load();
@@ -66,7 +64,7 @@ public class NewUserController {
             alert.show();
         }else{
             if(loginmodel.Singup(username,passwd)){
-                FXMLLoader loader=new FXMLLoader(Main.class.getResource("Login.fxml"));
+                FXMLLoader loader=new FXMLLoader(App.class.getResource("Login.fxml"));
                 LoginController loginController=new LoginController(stage);
                 loader.setController(loginController);
                 root=loader.load();

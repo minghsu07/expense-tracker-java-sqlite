@@ -1,8 +1,7 @@
 package com.andy.expensetracker.Expense;
 
-import com.andy.expensetracker.Login.LoginController;
 import com.andy.expensetracker.Login.LoginModel;
-import com.andy.expensetracker.Main;
+import com.andy.expensetracker.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +16,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.function.UnaryOperator;
 
 public class NewExpense {
@@ -42,7 +40,7 @@ public class NewExpense {
 
     public void handleHomeClicked(ActionEvent event) throws Exception{
 
-        FXMLLoader loader=new FXMLLoader(Main.class.getResource("Main.fxml"));
+        FXMLLoader loader=new FXMLLoader(App.class.getResource("Main.fxml"));
         MainController mainController=new MainController(stage,Login);
         loader.setController(mainController);
         root=loader.load();
@@ -55,7 +53,7 @@ public class NewExpense {
         // Define a filter to allow only digits
         UnaryOperator<TextFormatter.Change> filter = change -> {
             String newText = change.getControlNewText();
-            if (newText.matches("\\d*\\.?\\d*")) { // Allows only numbers
+            if (newText.matches("\\$\\d*\\.?\\d*")) { // Allows only numbers
                 return change;
             }
             return null;
@@ -63,6 +61,14 @@ public class NewExpense {
 
         TextFormatter<String> textFormatter=new TextFormatter<>(filter);
         Amount.setTextFormatter(textFormatter);
+        Amount.setText("$");
+        Amount.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.startsWith("$")) {
+                Amount.setText("$" + newValue.replaceAll("[^0-9.]", "")); // Remove invalid characters
+            } else {
+                Amount.setText("$" + newValue.substring(1).replaceAll("[^0-9.]", ""));
+            }
+        });
         Combo_Category.getItems().addAll(getCategory());
         //Set a custom cell factory to define how items are displayed
         Combo_Category.setCellFactory(listView -> new ListCell<Category>(){
@@ -97,7 +103,7 @@ public class NewExpense {
         String item=Item.getText().replaceAll("\\s","");
         Category selectedItem=(Category)Combo_Category.getSelectionModel().getSelectedItem();
         int category_id=selectedItem.getID();
-        BigDecimal amount=new BigDecimal(Amount.getText().toString());
+        BigDecimal amount=new BigDecimal(Amount.getText().substring(1).toString());
         LocalDate date=SelectedDate.getValue();
         String formattedDate = date.toString();
 
@@ -131,7 +137,7 @@ public class NewExpense {
                 e.printStackTrace();
             }
             finally {
-                Login.SQLConn.getConnection().close();
+//                Login.SQLConn.getConnection().close();
                 PreStat.close();
             }
 

@@ -59,10 +59,57 @@ public class DBConnection {
         try {
             if (connection != null) {
                 System.out.println("New database created at " + DB_PATH);
-                String localDir = System.getProperty("user.dir")+"\\src\\main\\java\\com\\andy\\expensetracker\\Database\\";
-                String SQL_FILE = localDir+"initializeDB.sql";
-                Statement stmt = connection.createStatement();
-                executeSqlFile(SQL_FILE);
+//                String localDir = System.getProperty("user.dir")+"\\src\\main\\java\\com\\andy\\expensetracker\\Database\\";
+//                String SQL_FILE = localDir+"initializeDB.sql";
+                String query=
+
+                        "CREATE TABLE EX_EXPENSE(\n" +
+                        "      EXPENSE_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                        "      USER_ID INTEGER NOT NULL REFERENCES EX_USER(USER_ID),\n" +
+                        "      ITEM    VARCHAR(25) NOT NULL,\n" +
+                        "      CATEGORY_ID INTEGER NOT NULL REFERENCES EX_CATEGORY(CATEGORY_ID),\n" +
+                        "      AMOUNT DECIMAL(10,2) NOT NULL,\n" +
+                        "      CREATED_DATE DATE NOT NULL,\n" +
+                        "      DESCRIPTION TEXT\n" +
+                        ");";
+//                Statement stmt = connection.createStatement();
+//                executeSqlFile(SQL_FILE);
+                Statement stmt= connection.createStatement();
+                stmt.addBatch("CREATE TABLE EX_USER(\n" +
+                        "      USER_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                        "      USERNAME VARCHAR(20) UNIQUE,\n" +
+                        "      PASSWORD VARCHAR(40),\n" +
+                        "      Created_Date    Date);");
+                stmt.addBatch("CREATE TABLE EX_CATEGORY(\n" +
+                        "      CATEGORY_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                                "      CATEGORY_NAME VARCHAR(25) NOT NULL\n" +
+                                "  );");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('HOUSING');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('UTILITIES');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('FOOD');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('SAVING');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('LOAN');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('HEALTHCARE');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('CHILD EXPENSE');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('PERSONAL CARE');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('PETS');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('CLOTHES');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('HOME SUPPLIES');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('FUN');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('MEMBERSHIPS');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('OTHERS');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('INSURANCE');");
+                stmt.addBatch("CREATE TABLE EX_EXPENSE(\n" +
+                        "      EXPENSE_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                        "      USER_ID INTEGER NOT NULL REFERENCES EX_USER(USER_ID),\n" +
+                        "      ITEM    VARCHAR(25) NOT NULL,\n" +
+                        "      CATEGORY_ID INTEGER NOT NULL REFERENCES EX_CATEGORY(CATEGORY_ID),\n" +
+                        "      AMOUNT DECIMAL(10,2) NOT NULL,\n" +
+                        "      CREATED_DATE DATE NOT NULL,\n" +
+                        "      DESCRIPTION TEXT\n" +
+                        ");");
+
+                stmt.executeBatch();
                 System.out.println("Tables are ready.");
 
             }else{

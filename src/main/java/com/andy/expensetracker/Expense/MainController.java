@@ -2,9 +2,7 @@ package com.andy.expensetracker.Expense;
 
 import com.andy.expensetracker.Login.LoginController;
 import com.andy.expensetracker.Login.LoginModel;
-import com.andy.expensetracker.Main;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import com.andy.expensetracker.App;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,25 +13,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.lang.module.ResolutionException;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class MainController implements Initializable {
+public class MainController  {
 
     private Stage stage;
     private Scene scene;
@@ -71,7 +66,7 @@ public class MainController implements Initializable {
 
 
     @FXML
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize()  {
 
 
 //        year=localdate.getYear();
@@ -126,6 +121,24 @@ public class MainController implements Initializable {
         getAllExpense(Cur_year,Cur_mon,-1, Login.getID());
         ExpenseTable.setItems(data);
         ExpenseTable.setEditable(false);
+        ExpenseTable.setOnMouseClicked((MouseEvent event) -> {
+            if (event.getClickCount() == 2) { // Check if double-click
+                ExpenseModel selectedExpense = ExpenseTable.getSelectionModel().getSelectedItem();
+                if (selectedExpense != null) {
+                    FXMLLoader loader=new FXMLLoader(App.class.getResource("UpdateExpense.fxml"));
+                    UpdateExpenseController updateExpenseController=new UpdateExpenseController(stage,Login,selectedExpense);
+                    loader.setController(updateExpenseController);
+                    try {
+                        root=loader.load();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    scene=new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                }
+            }
+        });
 
         getTotalAmount(Cur_year,Cur_mon,-1, Login.getID());
 
@@ -153,7 +166,7 @@ public class MainController implements Initializable {
     }
 
     public void NewExpenseClicked(ActionEvent event) throws Exception{
-        FXMLLoader loader=new FXMLLoader(Main.class.getResource("NewExpense.fxml"));
+        FXMLLoader loader=new FXMLLoader(App.class.getResource("NewExpense.fxml"));
         NewExpense newExpense=new NewExpense(stage,Login);
         loader.setController(newExpense);
         root=loader.load();
@@ -164,7 +177,7 @@ public class MainController implements Initializable {
 
     public void LogoutClicked(ActionEvent event) throws Exception{
 
-        FXMLLoader loader=new FXMLLoader(Main.class.getResource("Login.fxml"));
+        FXMLLoader loader=new FXMLLoader(App.class.getResource("Login.fxml"));
         LoginController loginController=new LoginController(stage);
         loader.setController(loginController);
         root=loader.load();
@@ -192,7 +205,7 @@ public class MainController implements Initializable {
         try{
             String query="";
             if(category_id!=-1){
-                query="SELECT STRFTIME('%F',CREATED_DATE) AS DATE," +
+                query="SELECT E.EXPENSE_ID AS ID, STRFTIME('%F',CREATED_DATE) AS DATE," +
                         "CONCAT(UPPER(SUBSTRING(C.CATEGORY_NAME,1,1)),LOWER(SUBSTRING(C.CATEGORY_NAME,2,LENGTH(C.CATEGORY_NAME)))) AS CATEGORY_NAME," +
                         "E.ITEM AS ITEM," +
                         "printf(\"%.2f\", E.AMOUNT) AS AMOUNT " +
@@ -201,7 +214,7 @@ public class MainController implements Initializable {
                         "WHERE E.USER_ID="+user_id+" AND C.CATEGORY_ID="+category_id+" AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))='"+Selected_date +"'"+
                         " ORDER BY E.CREATED_DATE;";
             }else{
-                query="SELECT STRFTIME('%F',CREATED_DATE) AS DATE," +
+                query="SELECT E.EXPENSE_ID AS ID, STRFTIME('%F',CREATED_DATE) AS DATE," +
                         "CONCAT(UPPER(SUBSTRING(C.CATEGORY_NAME,1,1)),LOWER(SUBSTRING(C.CATEGORY_NAME,2,LENGTH(C.CATEGORY_NAME)))) AS CATEGORY_NAME," +
                         "E.ITEM AS ITEM," +
                         "printf(\"%.2f\", E.AMOUNT) AS AMOUNT " +
@@ -216,12 +229,13 @@ public class MainController implements Initializable {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             data=FXCollections.observableArrayList();
             while(result.next()){
+                int id=result.getInt("ID");
                 String item=result.getString("ITEM");
                 String Category=result.getString("CATEGORY_NAME");
                 BigDecimal amount=result.getBigDecimal("Amount");
                 LocalDate date=LocalDate.parse(result.getString("DATE"));
-                data.add(new ExpenseModel(item,Category,amount,date));
-                System.out.println(item+" "+Category+" "+amount+" "+date);
+                data.add(new ExpenseModel(id,item,Category,amount,date));
+//                System.out.println(item+" "+Category+" "+amount+" "+date);
             }
 
 

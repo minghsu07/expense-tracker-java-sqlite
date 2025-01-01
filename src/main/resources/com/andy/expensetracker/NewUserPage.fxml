@@ -82,19 +82,21 @@
             <Insets left="130.0" />
          </padding>
       </VBox>
-      <VBox alignment="TOP_CENTER" layoutX="360.0" layoutY="366.0" prefHeight="128.0" prefWidth="520.0">
+      <VBox alignment="TOP_CENTER" layoutX="521.0" layoutY="464.0" prefHeight="128.0" prefWidth="520.0">
          <padding>
             <Insets top="30.0" />
          </padding>
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleSignupClicked" style="-fx-background-color: #65B25E; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-padding: 10,30;" text="Sign up" textFill="WHITE">
+               <font>
+                  <Font name="Cambria" size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
       </VBox>
-      <Button layoutX="710.0" layoutY="508.0" mnemonicParsing="false" onAction="#handleSignupClicked" style="-fx-background-color: #65B25E; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-padding: 10,30;" text="Sign up" textFill="WHITE">
-         <font>
-            <Font name="Cambria" size="24.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <Button layoutX="972.0" layoutY="30.0" mnemonicParsing="false" onAction="#handleHomeClicked" style="-fx-background-color: transparent;">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -102,7 +104,7 @@
          <graphic>
             <ImageView fitHeight="56.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../OneDrive/Desktop/Centennial/icons/home.png" />
+                  <Image url="@icons/home.png" />
                </image>
             </ImageView>
          </graphic>

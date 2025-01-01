@@ -66,7 +66,7 @@
             <Insets left="130.0" />
          </padding>
       </VBox>
-      <HBox alignment="TOP_CENTER" layoutX="360.0" layoutY="323.0" prefHeight="100.0" prefWidth="518.0">
+      <HBox alignment="TOP_CENTER" layoutX="509.0" layoutY="432.0" prefHeight="100.0" prefWidth="518.0">
          <padding>
             <Insets top="30.0" />
          </padding>

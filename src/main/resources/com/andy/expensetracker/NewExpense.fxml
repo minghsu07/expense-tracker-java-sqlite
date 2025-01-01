@@ -90,7 +90,7 @@
          <graphic>
             <ImageView fitHeight="56.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../OneDrive/Desktop/Centennial/icons/home.png" />
+                  <Image url="@icons/home.png" />
                </image>
             </ImageView>
          </graphic>

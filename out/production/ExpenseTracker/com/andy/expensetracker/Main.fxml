@@ -123,7 +123,7 @@
                <children>
                   <ImageView fitHeight="80.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../OneDrive/Desktop/Centennial/icons/userIcon.png" />
+                        <Image url="@icons/userIcon.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="UserName" alignment="TOP_CENTER">

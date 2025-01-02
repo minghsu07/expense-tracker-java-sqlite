@@ -6,10 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,11 +22,16 @@ public class NewUserController {
     }
 
     @FXML
-    private TextField Username;
+    private TextField Username,RetryField;
+
+    @FXML
+    private TextField PasswordField;
     @FXML
     private PasswordField Password;
     @FXML
     private PasswordField RetryPasswd;
+    @FXML
+    private ToggleButton ShowPasswdToggle,ShowRetryToggle;
     @FXML
     private Button HomeButton;
     @FXML
@@ -85,5 +87,36 @@ public class NewUserController {
 
     }
 
+    public void initialize(){
+        PasswordField.setVisible(false);
+        ShowPasswdToggle.setOnAction(event -> {
+            if (ShowPasswdToggle.isSelected()) {
+                Password.setManaged(false);
+                Password.setVisible(false);
+                PasswordField.setText(Password.getText());
+                PasswordField.setVisible(true);
+
+            } else {
+                PasswordField.setVisible(false);
+                Password.setVisible(true);
+                Password.setText(PasswordField.getText());
+            }
+        });
+
+        RetryField.setVisible(false);
+        ShowRetryToggle.setOnAction(event -> {
+            if (ShowRetryToggle.isSelected()) {
+                RetryPasswd.setManaged(false);
+                RetryPasswd.setVisible(false);
+                RetryField.setText(Password.getText());
+                RetryField.setVisible(true);
+
+            } else {
+                RetryField.setVisible(false);
+                RetryPasswd.setVisible(true);
+                RetryPasswd.setText(RetryField.getText());
+            }
+        });
+    }
 
 }

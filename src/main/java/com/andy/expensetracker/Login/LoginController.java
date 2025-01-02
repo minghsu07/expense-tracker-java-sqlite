@@ -9,6 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -29,9 +32,14 @@ public class LoginController  {
     @FXML
     private TextField Username;
 
+    @FXML
+    private ToggleButton showPasswordToggle;
 
     @FXML
     private PasswordField Password;
+
+    @FXML
+    private TextField textfield;
 
     @FXML
     void handleSignupClicked(ActionEvent event) throws IOException {
@@ -76,8 +84,25 @@ public class LoginController  {
 
     }
 
+
+
     public void initialize(){
 //        Username.setText("andy");
 //        Password.setText("andy");
+        textfield.setVisible(false);
+        showPasswordToggle.setOnAction(event -> {
+            if (showPasswordToggle.isSelected()) {
+                Password.setManaged(false);
+                Password.setVisible(false);
+                textfield.setText(Password.getText());
+                textfield.setVisible(true);
+
+            } else {
+                textfield.setVisible(false);
+                Password.setVisible(true);
+                Password.setText(textfield.getText());
+            }
+        });
+
     }
 }

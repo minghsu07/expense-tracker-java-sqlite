@@ -33,6 +33,9 @@ public class NewExpense {
     @FXML
     private DatePicker SelectedDate;
 
+    @FXML
+    private TextArea Description;
+
     public NewExpense(Stage stage,LoginModel login){
         Login=login;
         this.stage=stage;
@@ -58,9 +61,10 @@ public class NewExpense {
             }
             return null;
         };
-
+        Item.getStyleClass().addAll("NewExpense-font-style");
         TextFormatter<String> textFormatter=new TextFormatter<>(filter);
         Amount.setTextFormatter(textFormatter);
+        Amount.getStyleClass().addAll("NewExpense-font-style");
         Amount.setText("$");
         Amount.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.startsWith("$")) {
@@ -70,6 +74,8 @@ public class NewExpense {
             }
         });
         Combo_Category.getItems().addAll(getCategory());
+        Combo_Category.getStyleClass().addAll("NewExpense-font-style");
+        Combo_Category.getSelectionModel().selectFirst();
         //Set a custom cell factory to define how items are displayed
         Combo_Category.setCellFactory(listView -> new ListCell<Category>(){
             @Override
@@ -96,35 +102,40 @@ public class NewExpense {
             }
         });
         SelectedDate.setValue(LocalDate.now());
+        SelectedDate.getStyleClass().add("NewExpense-font-style");
     }
 
     public void Addclicked(ActionEvent event) throws  Exception{
         Alert alert=new Alert(Alert.AlertType.ERROR);
-        String item=Item.getText().replaceAll("\\s","");
-        Category selectedItem=(Category)Combo_Category.getSelectionModel().getSelectedItem();
-        int category_id=selectedItem.getID();
-        BigDecimal amount=new BigDecimal(Amount.getText().substring(1).toString());
-        LocalDate date=SelectedDate.getValue();
-        String formattedDate = date.toString();
 
-
-
-        if(item.isEmpty()){
-            alert.setContentText("You must fill in all fields");
+        if(Item==null||Amount==null||Amount.getLength()<2){
+            alert.setContentText("You must fill in all required fields");
             alert.show();
         }else {
             PreparedStatement PreStat=null;
+            String item=Item.getText().replaceAll("\\s","");
+            BigDecimal amount=new BigDecimal(Amount.getText().substring(1).toString());
+            Category selectedItem=(Category)Combo_Category.getSelectionModel().getSelectedItem();
+            int category_id=selectedItem.getID();
 
+            LocalDate date=SelectedDate.getValue();
+            String formattedDate = date.toString();
+            String desc="";
+            if (Description != null) {
+                desc = Description.getText();
+
+            }
             try{
                 String query="";
-                query="INSERT INTO EX_EXPENSE (USER_ID,ITEM,CATEGORY_ID,AMOUNT,CREATED_DATE) VALUES(?,?,?,?,?)";
-
+                query="INSERT INTO EX_EXPENSE (USER_ID,ITEM,CATEGORY_ID,AMOUNT,CREATED_DATE,DESCRIPTION) VALUES(?,?,?,?,?,?)";
+//                query="INSERT INTO EX_EXPENSE (USER_ID,ITEM,CATEGORY_ID,AMOUNT,CREATED_DATE,DESCRIPTION) VALUES(?,?,?,?,?,'TEST')";
                 PreStat=Login.SQLConn.getConnection().prepareStatement(query);
                 PreStat.setInt(1,Login.getID());
                 PreStat.setString(2,item);
                 PreStat.setInt(3,category_id);
                 PreStat.setBigDecimal(4,amount);
                 PreStat.setString(5,formattedDate);
+                PreStat.setString(6,desc);
 
                 PreStat.executeUpdate();
 

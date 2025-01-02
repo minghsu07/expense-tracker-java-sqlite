@@ -11,9 +11,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.function.UnaryOperator;
 
@@ -30,6 +33,8 @@ public class UpdateExpenseController {
     private ComboBox Combo_Category;
     @FXML
     private DatePicker SelectedDate;
+    @FXML
+    private TextArea Description;
 
     public UpdateExpenseController(Stage stage,LoginModel login,ExpenseModel expense){
         Login=login;
@@ -38,6 +43,12 @@ public class UpdateExpenseController {
     }
 
     public void initialize(){
+
+        Item.getStyleClass().addAll("NewExpense-font-style");
+        Amount.getStyleClass().addAll("NewExpense-font-style");
+        Description.getStyleClass().addAll("NewExpense-font-style");
+        SelectedDate.getStyleClass().addAll("NewExpense-font-style");
+
         Item.setText(Expense.getItem());
         UnaryOperator<TextFormatter.Change> filter = change -> {
             String newText = change.getControlNewText();
@@ -56,7 +67,35 @@ public class UpdateExpenseController {
                 Amount.setText("$" + newValue.substring(1).replaceAll("[^0-9.]", ""));
             }
         });
+
+        Combo_Category.getItems().addAll(getCategory());
+        Combo_Category.getStyleClass().addAll("NewExpense-font-style");
         Combo_Category.setValue(Expense.getCategory());
+        //Set a custom cell factory to define how items are displayed
+        Combo_Category.setCellFactory(listView -> new ListCell<Category>(){
+            @Override
+            protected void updateItem(Category item,boolean empty){
+                super.updateItem(item,empty);
+                if (empty || item == null) {
+                    setText(null);
+                }else{
+                    setText(item.getName());
+                }
+            }
+        });
+        //Set a custom display format for the selected item in the ComboBox
+        Combo_Category.setButtonCell(new ListCell<Category>(){
+            @Override
+            protected void updateItem(Category item,boolean empty){
+                super.updateItem(item,empty);
+                if(empty || item==null){
+                    setText(null);
+                }
+                else{
+                    setText(item.getName());
+                }
+            }
+        });
         SelectedDate.setValue(Expense.getDate());
     }
 
@@ -72,6 +111,56 @@ public class UpdateExpenseController {
     }
 
     public void Updateclicked(ActionEvent event) throws Exception{
+        Alert alert=new Alert(Alert.AlertType.ERROR);
+        PreparedStatement PreStat=null;
+
+        Alert warning=new Alert(Alert.AlertType.WARNING,"You sure want to update?",ButtonType.YES,ButtonType.NO);
+        warning.setHeaderText("Delete Expense");
+
+        Optional<ButtonType> result = warning.showAndWait();
+
+        if(result.isPresent() && result.get() == ButtonType.NO){
+            return;
+        }else if(Item==null||Amount==null||Amount.getLength()<2){
+
+            alert.setContentText("You must fill in all required fields");
+            alert.show();
+        }else {
+            String item = Item.getText().replaceAll("\\s", "");
+            BigDecimal amount = new BigDecimal(Amount.getText().substring(1).toString());
+            Category selectedItem = (Category) Combo_Category.getSelectionModel().getSelectedItem();
+            int category_id = selectedItem.getID();
+
+            LocalDate date = SelectedDate.getValue();
+            String formattedDate = date.toString();
+            String desc = "";
+            if (Description != null) {
+                desc = Description.getText();
+
+            }
+            try {
+                String query = "";
+                query = "UPDATE EX_EXPENSE SET ITEM=? , CATEGORY_ID=?,AMOUNT=?,CREATED_DATE=?,DESCRIPTION=? WHERE EXPENSE_ID=?";
+
+                PreStat = Login.SQLConn.getConnection().prepareStatement(query);
+
+                PreStat.setString(1, item);
+                PreStat.setInt(2, category_id);
+                PreStat.setBigDecimal(3, amount);
+                PreStat.setString(4, formattedDate);
+                PreStat.setString(5, desc);
+                PreStat.setInt(6, Expense.getID());
+
+                PreStat.executeUpdate();
+                Alert msg=new Alert(Alert.AlertType.INFORMATION,"Expensed Updated");
+                msg.setHeaderText("Success");
+                msg.setTitle("Update Expense");
+                msg.show();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -99,5 +188,27 @@ public class UpdateExpenseController {
             }
         }
 
+    }
+    private ArrayList<Category> getCategory(){
+
+        ArrayList<Category> categories= new ArrayList<Category>();
+
+        try{
+            String query="select category_id, Concat(" +
+                    "upper(substring(category_name,1,1))," +
+                    "Lower(substring(category_name,2,Length(category_name)))" +
+                    ") as Name from ex_category";
+            PreparedStatement Prepstat=Login.SQLConn.getConnection().prepareStatement(query);
+            ResultSet result=Prepstat.executeQuery();
+
+            while(result.next()){
+                categories.add(new Category(result.getInt("Category_ID"),result.getString("Name")));
+            }
+
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return categories;
     }
 }

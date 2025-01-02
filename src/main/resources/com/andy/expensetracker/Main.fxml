@@ -108,8 +108,9 @@
               <columns>
                 <TableColumn fx:id="col_Item" prefWidth="193.0" resizable="false" text="Item" />
                 <TableColumn fx:id="col_Category" prefWidth="195.0" resizable="false" text="Category" />
-                  <TableColumn fx:id="col_Date" prefWidth="148.0" resizable="false" text="Date" />
-                  <TableColumn fx:id="col_Amount" prefWidth="155.0" resizable="false" text="Amount" />
+                  <TableColumn fx:id="col_Date" prefWidth="131.3333740234375" resizable="false" text="Date" />
+                  <TableColumn fx:id="col_Amount" prefWidth="183.3333740234375" resizable="false" text="Amount" />
+                  <TableColumn fx:id="col_button" prefWidth="124.6666259765625" resizable="false" text="Description" />
               </columns>
                <VBox.margin>
                   <Insets top="20.0" />
@@ -162,7 +163,7 @@
                   </Button>
                </children>
             </VBox>
-            <Button  mnemonicParsing="false" onAction="#LogoutClicked" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #EDBD3A; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Log out" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#LogoutClicked" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #EDBD3A; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Log out" textFill="WHITE">
                <font>
                   <Font name="Cambria Bold" size="18.0" />
                </font>

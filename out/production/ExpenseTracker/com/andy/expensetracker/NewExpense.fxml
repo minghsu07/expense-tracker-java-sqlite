@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="650.0" maxWidth="1070.0" prefHeight="650.0" prefWidth="1070.0" style="-fx-background-color: CAEDCA;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="650.0" maxWidth="1070.0" prefHeight="650.0" prefWidth="1070.0" style="-fx-background-color: CAEDCA;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="205.0" layoutY="39.0" prefHeight="589.0" prefWidth="660.0" style="-fx-background-color: #40A883; -fx-background-radius: 20;">
          <children>
@@ -25,9 +26,9 @@
                   <Insets top="40.0" />
                </VBox.margin>
             </Label>
-            <VBox maxWidth="463.0" minWidth="300.0" prefHeight="358.0" prefWidth="463.0">
+            <VBox maxWidth="463.0" minWidth="300.0" prefHeight="430.0" prefWidth="463.0">
                <VBox.margin>
-                  <Insets left="50.0" top="30.0" />
+                  <Insets left="50.0" top="15.0" />
                </VBox.margin>
                <children>
                   <Label text="Item:" textFill="WHITE">
@@ -48,7 +49,7 @@
                         <Insets top="15.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox fx:id="Combo_Category" prefHeight="40.0" prefWidth="400.0" />
+                  <ComboBox fx:id="Combo_Category" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="400.0" />
                   <Label text="Amount:" textFill="WHITE">
                      <font>
                         <Font name="Cambria Bold" size="18.0" />
@@ -71,14 +72,30 @@
                      </VBox.margin>
                   </Label>
                   <DatePicker fx:id="SelectedDate" maxHeight="40.0" maxWidth="400.0" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="400.0" />
+                  <Label text="Description(Optional):" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextArea fx:id="Description" maxWidth="400.0" minWidth="400.0" prefHeight="200.0" prefWidth="400.0">
+                     <font>
+                        <Font name="Cambria" size="14.0" />
+                     </font>
+                  </TextArea>
                </children>
             </VBox>
-            <Button onAction="#Addclicked" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #EDBD3A;" text="Add" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#Addclicked" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #EDBD3A;" text="Add" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                <font>
                   <Font name="Cambria Bold" size="18.0" />
                </font>
                <VBox.margin>
-                  <Insets top="40.0" />
+                  <Insets top="15.0" />
                </VBox.margin>
             </Button>
          </children>
@@ -90,7 +107,7 @@
          <graphic>
             <ImageView fitHeight="56.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@icons/home.png" />
+                  <Image url="@icons/return.png" />
                </image>
             </ImageView>
          </graphic>

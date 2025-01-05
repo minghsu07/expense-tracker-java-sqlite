@@ -24,6 +24,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -210,7 +211,12 @@ public class MainController  {
 
         Combo_Year.setValue(String.valueOf(Cur_year));
         Combo_Month.setValue(String.valueOf(Cur_mon));
+        Category selectedItem=(Category)Combo_Category.getSelectionModel().getSelectedItem();
+        int category_id=selectedItem.getID();
 
+        getAllExpense(Cur_year,Cur_mon,category_id, Login.getID());
+        ExpenseTable.setItems(data);
+        getTotalAmount(Cur_year,Cur_mon,category_id, Login.getID());
     }
 
     public void NewExpenseClicked(ActionEvent event) throws Exception{
@@ -318,8 +324,10 @@ public class MainController  {
 
             PreparedStatement Prepstat = Login.SQLConn.getConnection().prepareStatement(query);
             ResultSet result = Prepstat.executeQuery();
+            DecimalFormat formatter=new DecimalFormat("#,##0.00");
             while(result.next()){
-                TotalAmount.setText("$"+result.getBigDecimal("AMOUNT"));
+                String amount=formatter.format(result.getBigDecimal("AMOUNT"));
+                TotalAmount.setText("$"+amount);
             }
         }
         catch (SQLException e){

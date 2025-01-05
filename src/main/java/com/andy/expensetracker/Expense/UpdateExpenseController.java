@@ -67,10 +67,16 @@ public class UpdateExpenseController {
                 Amount.setText("$" + newValue.substring(1).replaceAll("[^0-9.]", ""));
             }
         });
-
-        Combo_Category.getItems().addAll(getCategory());
+        ArrayList<Category> categories=getCategory();
+        Combo_Category.getItems().addAll(categories);
+        for (Category category : categories) {
+            if (category.getName().equals(Expense.getCategory())) { // Matching by name
+                Combo_Category.getSelectionModel().select(category);
+                break;
+            }
+        }
         Combo_Category.getStyleClass().addAll("NewExpense-font-style");
-        Combo_Category.setValue(Expense.getCategory());
+
         //Set a custom cell factory to define how items are displayed
         Combo_Category.setCellFactory(listView -> new ListCell<Category>(){
             @Override
@@ -96,6 +102,7 @@ public class UpdateExpenseController {
                 }
             }
         });
+        Description.setText(Expense.getDescription());
         SelectedDate.setValue(Expense.getDate());
     }
 
@@ -126,7 +133,7 @@ public class UpdateExpenseController {
             alert.setContentText("You must fill in all required fields");
             alert.show();
         }else {
-            String item = Item.getText().replaceAll("\\s", "");
+            String item = Item.getText();
             BigDecimal amount = new BigDecimal(Amount.getText().substring(1).toString());
             Category selectedItem = (Category) Combo_Category.getSelectionModel().getSelectedItem();
             int category_id = selectedItem.getID();

@@ -1,7 +1,7 @@
 package com.andy.expensetracker.Expense;
 
-import com.andy.expensetracker.Login.LoginModel;
 import com.andy.expensetracker.App;
+import com.andy.expensetracker.Login.LoginModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.function.UnaryOperator;
 
-public class NewExpense {
+public class NewIncome {
 
     private Stage stage;
     private Scene scene;
@@ -27,16 +27,16 @@ public class NewExpense {
     private LoginModel Login;
 
     @FXML
-    private TextField Item,Amount;
-    @FXML
-    private ComboBox Combo_Category;
+    private TextField Item,Amount,Category;
+
+
     @FXML
     private DatePicker SelectedDate;
 
     @FXML
     private TextArea Description;
 
-    public NewExpense(Stage stage,LoginModel login){
+    public NewIncome(Stage stage, LoginModel login){
         Login=login;
         this.stage=stage;
     }
@@ -66,9 +66,7 @@ public class NewExpense {
             PreparedStatement PreStat=null;
             String item=Item.getText();
             BigDecimal amount=new BigDecimal(Amount.getText().substring(1).toString());
-            Category selectedItem=(Category)Combo_Category.getSelectionModel().getSelectedItem();
-            int category_id=selectedItem.getID();
-
+            int category_id=0;
             LocalDate date=SelectedDate.getValue();
             String formattedDate = date.toString();
             String desc="";
@@ -77,6 +75,12 @@ public class NewExpense {
 
             }
             try{
+                PreparedStatement stat=Login.SQLConn.getConnection().prepareStatement("SELECT CATEGORY_ID FROM EX_CATEGORY WHERE CATEGORY_NAME='INCOME'");
+                ResultSet result= stat.executeQuery();
+                while(result.next()){
+                    category_id=result.getInt("CATEGORY_ID");
+                }
+
                 String query="";
                 query="INSERT INTO EX_EXPENSE (USER_ID,ITEM,CATEGORY_ID,AMOUNT,CREATED_DATE,DESCRIPTION) VALUES(?,?,?,?,?,?)";
 //                query="INSERT INTO EX_EXPENSE (USER_ID,ITEM,CATEGORY_ID,AMOUNT,CREATED_DATE,DESCRIPTION) VALUES(?,?,?,?,?,'TEST')";
@@ -117,14 +121,13 @@ public class NewExpense {
 
     private ArrayList<Category> getCategory(){
 
-        Combo_Category.getItems().clear();
         ArrayList<Category> categories= new ArrayList<Category>();
 
         try{
             String query="select category_id, Concat(" +
                     "upper(substring(category_name,1,1))," +
                     "Lower(substring(category_name,2,Length(category_name)))" +
-                    ") as Name from ex_category where Name != \"Income\"";
+                    ") as Name from ex_category";
             PreparedStatement Prepstat=Login.SQLConn.getConnection().prepareStatement(query);
             ResultSet result=Prepstat.executeQuery();
 
@@ -161,35 +164,7 @@ public class NewExpense {
                 Amount.setText("$" + newValue.substring(1).replaceAll("[^0-9.]", ""));
             }
         });
-        Combo_Category.getItems().addAll(getCategory());
-        Combo_Category.getStyleClass().addAll("NewExpense-font-style");
-//        Combo_Category.getSelectionModel().selectFirst();
-        Combo_Category.setValue("");
-        //Set a custom cell factory to define how items are displayed
-        Combo_Category.setCellFactory(listView -> new ListCell<Category>(){
-            @Override
-            protected void updateItem(Category item,boolean empty){
-                super.updateItem(item,empty);
-                if (empty || item == null) {
-                    setText(null);
-                }else{
-                    setText(item.getName());
-                }
-            }
-        });
-        //Set a custom display format for the selected item in the ComboBox
-        Combo_Category.setButtonCell(new ListCell<Category>(){
-            @Override
-            protected void updateItem(Category item,boolean empty){
-                super.updateItem(item,empty);
-                if(empty || item==null){
-                    setText(null);
-                }
-                else{
-                    setText(item.getName());
-                }
-            }
-        });
+        Category.setText("Income");
         SelectedDate.setValue(LocalDate.now());
         SelectedDate.getStyleClass().add("NewExpense-font-style");
         Description.setText("");

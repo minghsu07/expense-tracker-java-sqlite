@@ -40,10 +40,11 @@ public class MainController  {
     private LoginModel Login;
 //    private final Button showDetailButton = new Button("Detail");
     private final LocalDate localdate=LocalDate.now();
-    private final int Cur_year=localdate.getYear();
-    private final int Cur_mon=localdate.getMonthValue();
+    private int Cur_year=localdate.getYear();
+    private int Cur_mon=localdate.getMonthValue();
+    private int Income_ID;
     @FXML
-    private Label UserName,TotalAmount;
+    private Label UserName,TotalIncome,TotalExpense,Balance;
 
     @FXML
     private ComboBox Combo_Year,Combo_Month,Combo_Category;
@@ -127,6 +128,7 @@ public class MainController  {
         col_Category.getStyleClass().addAll("column-font-style");
         col_Amount.setCellValueFactory(new PropertyValueFactory<ExpenseModel,String>("Amount"));
         col_Amount.getStyleClass().addAll("column-style-left","column-font-style");
+
         col_Date.setCellValueFactory(new PropertyValueFactory<ExpenseModel,Date>("Date"));
         col_Date.getStyleClass().addAll("column-style-center","column-font-style");
 //        col_button.setCellValueFactory(new PropertyValueFactory<ExpenseModel,Button>("Button"));
@@ -188,41 +190,110 @@ public class MainController  {
                 }
             }
         });
-
-        getTotalAmount(Cur_year,Cur_mon,-1, Login.getID());
-
+//        getTotalIncome(Cur_year,Cur_mon,-1, Login.getID());
+//        getTotalExpense(Cur_year,Cur_mon,-1, Login.getID());
+        getBalance(Cur_year,Cur_mon,-1, Login.getID());
 
     }
 
     public void SearchClicked(ActionEvent event) throws Exception{
+        int year,mon;
 
-        int year=Integer.parseInt(Combo_Year.getValue().toString());
-        int mon=Integer.parseInt(Combo_Month.getValue().toString());
+        Cur_year = Integer.parseInt(Combo_Year.getValue().toString());
+
+        try{
+            Cur_mon=Integer.parseInt(Combo_Month.getValue().toString());
+        }catch (Exception e){
+            Cur_mon=0;
+        }
+
 //        String date = String.valueOf(year) + ((mon < 10) ? "0" + mon : String.valueOf(mon));
         Category selectedItem=(Category)Combo_Category.getSelectionModel().getSelectedItem();
         int category_id=selectedItem.getID();
 
-        getAllExpense(year,mon,category_id, Login.getID());
+
+//        getTotalIncome(year,mon,category_id, Login.getID());
+//        getTotalExpense(year,mon,category_id, Login.getID());
+        getBalance(Cur_year,Cur_mon,category_id, Login.getID());
+        getAllExpense(Cur_year,Cur_mon,category_id, Login.getID());
         ExpenseTable.setItems(data);
-        getTotalAmount(year,mon,category_id, Login.getID());
+
     }
 
     public void CurrentMonClicked(ActionEvent event) throws Exception{
-
+        Cur_year=localdate.getYear();
+        Cur_mon=localdate.getMonthValue();
         Combo_Year.setValue(String.valueOf(Cur_year));
-        Combo_Month.setValue(String.valueOf(Cur_mon));
+        Combo_Month.getSelectionModel().select(Cur_mon);
         Category selectedItem=(Category)Combo_Category.getSelectionModel().getSelectedItem();
         int category_id=selectedItem.getID();
 
+        //for table view
         getAllExpense(Cur_year,Cur_mon,category_id, Login.getID());
         ExpenseTable.setItems(data);
-        getTotalAmount(Cur_year,Cur_mon,category_id, Login.getID());
+        //for labels
+        getBalance(Cur_year,Cur_mon,category_id, Login.getID());
+    }
+
+    public void PreviousMonClicked(ActionEvent event) throws Exception{
+        if(Cur_mon==0){ //Currently all month
+            Cur_year-=1;
+        }else if(Cur_mon==1){ //Currently January
+            Cur_mon=12;
+            Cur_year-=1;
+        }else{
+            Cur_mon-=1;
+        }
+
+
+        Combo_Year.setValue(String.valueOf(Cur_year));
+        Combo_Month.getSelectionModel().select(Cur_mon);
+        Category selectedItem=(Category)Combo_Category.getSelectionModel().getSelectedItem();
+        int category_id=selectedItem.getID();
+
+        //for table view
+        getAllExpense(Cur_year,Cur_mon,category_id, Login.getID());
+        ExpenseTable.setItems(data);
+        //for labels
+        getBalance(Cur_year,Cur_mon,category_id, Login.getID());
+    }
+
+    public void NextMonClicked(ActionEvent event) throws Exception{
+        if(Cur_mon==0){ //Currently all month
+            Cur_year+=(Cur_year==localdate.getYear())?0:1;
+        }else if(Cur_mon==12){ //Currently December
+            Cur_mon=(Cur_year==localdate.getYear())?Cur_mon:1;
+            Cur_year+=(Cur_year==localdate.getYear())?0:1;
+        }else{
+            Cur_mon+=1;
+        }
+
+        Combo_Year.setValue(String.valueOf(Cur_year));
+        Combo_Month.getSelectionModel().select(Cur_mon);
+        Category selectedItem=(Category)Combo_Category.getSelectionModel().getSelectedItem();
+        int category_id=selectedItem.getID();
+
+        //for table view
+        getAllExpense(Cur_year,Cur_mon,category_id, Login.getID());
+        ExpenseTable.setItems(data);
+        //for labels
+        getBalance(Cur_year,Cur_mon,category_id, Login.getID());
     }
 
     public void NewExpenseClicked(ActionEvent event) throws Exception{
         FXMLLoader loader=new FXMLLoader(App.class.getResource("NewExpense.fxml"));
         NewExpense newExpense=new NewExpense(stage,Login);
         loader.setController(newExpense);
+        root=loader.load();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void NewIncomeClicked(ActionEvent event) throws Exception{
+        FXMLLoader loader=new FXMLLoader(App.class.getResource("NewIncome.fxml"));
+        NewIncome newIncome=new NewIncome(stage,Login);
+        loader.setController(newIncome);
         root=loader.load();
         scene=new Scene(root);
         stage.setScene(scene);
@@ -244,6 +315,7 @@ public class MainController  {
 
         LocalDate now= LocalDate.now();
         ArrayList<String> years=new ArrayList<String>();
+
         int CurrentYear=now.getYear();
         for(int i=0;i<15;i++){
 
@@ -253,11 +325,13 @@ public class MainController  {
     }
 
     private void getAllExpense(int year,int mon,int category_id,int user_id){
+        String Selected_date="";
 
-        String Selected_date=String.valueOf(year)+String.format("%02d",mon);
+
         data=null;
         try{
             String query="";
+
             if(category_id!=-1){
                 query="SELECT E.EXPENSE_ID AS ID, STRFTIME('%F',CREATED_DATE) AS DATE," +
                         "CONCAT(UPPER(SUBSTRING(C.CATEGORY_NAME,1,1)),LOWER(SUBSTRING(C.CATEGORY_NAME,2,LENGTH(C.CATEGORY_NAME)))) AS CATEGORY_NAME," +
@@ -266,7 +340,7 @@ public class MainController  {
                         "E.DESCRIPTION as DESCRIPTION " +
                         "FROM EX_EXPENSE AS E " +
                         "JOIN EX_CATEGORY AS C ON E.CATEGORY_ID=C.CATEGORY_ID " +
-                        "WHERE E.USER_ID="+user_id+" AND C.CATEGORY_ID="+category_id+" AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))='"+Selected_date +"'"+
+                        "WHERE E.USER_ID="+user_id+" AND C.CATEGORY_ID="+category_id+" AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))=?"+
                         " ORDER BY E.CREATED_DATE;";
             }else{
                 query="SELECT E.EXPENSE_ID AS ID, STRFTIME('%F',CREATED_DATE) AS DATE," +
@@ -276,19 +350,31 @@ public class MainController  {
                         "E.DESCRIPTION as DESCRIPTION " +
                         "FROM EX_EXPENSE AS E " +
                         "JOIN EX_CATEGORY AS C ON E.CATEGORY_ID=C.CATEGORY_ID " +
-                        "WHERE E.USER_ID="+user_id+" AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))='"+Selected_date +"'"+
+                        "WHERE E.USER_ID="+user_id+" AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))=?"+
                         " ORDER BY E.CREATED_DATE;";
             }
 
+            if(mon==0){
+                Selected_date=String.valueOf(year);
+                query=query.replace(",STRFTIME('%m',CREATED_DATE)","");
+
+
+            }else{
+                Selected_date=String.valueOf(year)+String.format("%02d",mon);
+            }
+
             PreparedStatement Prepstat=Login.SQLConn.getConnection().prepareStatement(query);
+            Prepstat.setString(1,Selected_date);
             ResultSet result=Prepstat.executeQuery();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             data=FXCollections.observableArrayList();
+            DecimalFormat decimalFormat=new DecimalFormat("#,##0.00");
             while(result.next()){
                 int id=result.getInt("ID");
                 String item=result.getString("ITEM");
                 String Category=result.getString("CATEGORY_NAME");
                 BigDecimal amount=result.getBigDecimal("Amount");
+                decimalFormat.format(amount);
                 LocalDate date=LocalDate.parse(result.getString("DATE"));
                 String desc=result.getString("DESCRIPTION");
 
@@ -303,8 +389,21 @@ public class MainController  {
         }
     }
 
-    private void getTotalAmount(int year,int mon,int category_id,int user_id){
-        String Selected_date=String.valueOf(year)+String.format("%02d",mon);
+    private void getBalance(int year, int mon, int category_id,int user_id){
+        DecimalFormat formatter=new DecimalFormat("#,##0.00");
+
+        double expense=getTotalExpense(year,mon,category_id,user_id);
+        double income=getTotalIncome(year,mon,category_id,user_id);
+        double balance=income-expense;
+
+        TotalExpense.setText("$"+formatter.format(expense));
+        TotalIncome.setText("$"+formatter.format(income));
+        Balance.setText("$"+formatter.format(balance));
+    }
+
+    private double getTotalExpense(int year,int mon,int category_id,int user_id){
+        double TotalExpense=0;
+        String Selected_date="";
 
         try {
             String query = "";
@@ -312,35 +411,85 @@ public class MainController  {
                 query = "SELECT printf(\"%.2f\",SUM(E.AMOUNT)) AS AMOUNT " +
                         "FROM EX_EXPENSE AS E " +
                         "JOIN EX_CATEGORY AS C ON E.CATEGORY_ID=C.CATEGORY_ID " +
-                        "WHERE E.USER_ID=" + user_id + " AND C.CATEGORY_ID=" + category_id + " AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))='" + Selected_date + "'" +
-                        " ORDER BY E.CREATED_DATE;";
+                        "WHERE E.USER_ID=" + user_id + " AND C.CATEGORY_ID=" + category_id + " AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))=? AND C.CATEGORY_ID!="+getIncome_ID()+
+                        " ORDER BY E.CREATED_DATE ;";
             } else {
                 query = "SELECT printf(\"%.2f\",SUM(E.AMOUNT)) AS AMOUNT " +
                         "FROM EX_EXPENSE AS E " +
                         "JOIN EX_CATEGORY AS C ON E.CATEGORY_ID=C.CATEGORY_ID " +
-                        "WHERE E.USER_ID=" + user_id + " AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))='" + Selected_date + "'" +
-                        " ORDER BY E.CREATED_DATE;";
+                        "WHERE E.USER_ID=" + user_id + " AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))=? AND C.CATEGORY_ID!="+getIncome_ID()+
+                        " ORDER BY E.CREATED_DATE ";
             }
+            if(mon==0){
+                Selected_date=String.valueOf(year);
+                query=query.replace(",STRFTIME('%m',CREATED_DATE)","");
 
+
+            }else{
+                Selected_date=String.valueOf(year)+String.format("%02d",mon);
+            }
             PreparedStatement Prepstat = Login.SQLConn.getConnection().prepareStatement(query);
+            Prepstat.setString(1,Selected_date);
             ResultSet result = Prepstat.executeQuery();
-            DecimalFormat formatter=new DecimalFormat("#,##0.00");
+
             while(result.next()){
-                String amount=formatter.format(result.getBigDecimal("AMOUNT"));
-                TotalAmount.setText("$"+amount);
+                TotalExpense=result.getDouble("AMOUNT");
+
             }
         }
         catch (SQLException e){
             e.printStackTrace();
-            TotalAmount.setText("$"+0.0);
+
+        }
+        return TotalExpense;
+
+    }
+
+    private double getTotalIncome(int year,int mon,int category_id,int user_id){
+        double TotalIncome=0;
+        String Selected_date="";
+
+        if(category_id!=getIncome_ID() && category_id!=-1){
+
+            return TotalIncome;
         }
 
+        try {
+            String query = "";
+            query = "SELECT printf(\"%.2f\",SUM(E.AMOUNT)) AS AMOUNT " +
+                        "FROM EX_EXPENSE AS E " +
+                        "JOIN EX_CATEGORY AS C ON E.CATEGORY_ID=C.CATEGORY_ID " +
+                        "WHERE E.USER_ID=" + user_id + " AND C.CATEGORY_id="+getIncome_ID() +" AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))=?" +
+                        " ORDER BY E.CREATED_DATE;";
+            if(mon==0){
+                Selected_date=String.valueOf(year);
+                query=query.replace(",STRFTIME('%m',CREATED_DATE)","");
 
+
+            }else{
+                Selected_date=String.valueOf(year)+String.format("%02d",mon);
+            }
+            PreparedStatement Prepstat = Login.SQLConn.getConnection().prepareStatement(query);
+            Prepstat.setString(1,Selected_date);
+            ResultSet result = Prepstat.executeQuery();
+
+            while(result.next()){
+                TotalIncome=result.getDouble("AMOUNT");
+
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+
+        }
+
+        return TotalIncome;
     }
 
     private ArrayList<String> Gen_Month(){
 
         ArrayList<String> Months=new ArrayList<String>();
+        Months.add("All months");
         for(int i=1;i<=12;i++){
 
             Months.add(Integer.toString(i));
@@ -371,7 +520,18 @@ public class MainController  {
         return categories;
     }
 
-
+    private int getIncome_ID(){
+        try{
+            PreparedStatement Prestat=Login.SQLConn.getConnection().prepareStatement("select category_id from ex_category where category_name=\"INCOME\";");
+            ResultSet resultSet=Prestat.executeQuery();
+            while(resultSet.next()){
+                Income_ID= resultSet.getInt("category_id");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return Income_ID;
+    }
 
 
 

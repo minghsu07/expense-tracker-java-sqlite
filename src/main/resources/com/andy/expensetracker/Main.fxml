@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="650.0" maxWidth="1070.0" prefHeight="650.0" prefWidth="1070.0" style="-fx-background-color: CAEDCA;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
-<!--   <AnchorPane maxHeight="650.0" maxWidth="1070.0" prefHeight="650.0" prefWidth="1070.0" style="-fx-background-color: CAEDCA;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">-->
+<!--<AnchorPane maxHeight="650.0" maxWidth="1070.0" prefHeight="650.0" prefWidth="1070.0" style="-fx-background-color: CAEDCA;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">-->
    <children>
       <VBox layoutX="25.0" layoutY="36.0" prefHeight="570.0" prefWidth="830.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20;">
          <children>
@@ -70,9 +70,9 @@
             </HBox>
             <GridPane>
               <columnConstraints>
-                <ColumnConstraints hgrow="ALWAYS" maxWidth="410.0" minWidth="10.0" prefWidth="148.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="670.0" minWidth="0.0" prefWidth="479.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="670.0" minWidth="10.0" prefWidth="189.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="271.0" minWidth="10.0" prefWidth="250.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="479.0" minWidth="0.0" prefWidth="440.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="407.0" minWidth="10.0" prefWidth="250.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -86,20 +86,22 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
-                     <children>
-                        <Label text="Total Amount" textFill="#433d3d">
-                           <font>
-                              <Font name="Cambria" size="13.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="TotalAmount" text="\$">
-                           <font>
-                              <Font name="Cambria Bold" size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
+                  <Button fx:id="Button_PreviousMon" onAction="#PreviousMonClicked" mnemonicParsing="false" prefHeight="34.0" prefWidth="77.0" style="-fx-background-color: #337BD6; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="&lt;" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="Button_Nextmon" onAction="#NextMonClicked" mnemonicParsing="false" prefHeight="34.0" prefWidth="77.0" style="-fx-background-color: #337BD6; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="&gt;" textFill="WHITE" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                </children>
                <VBox.margin>
                   <Insets top="50.0" />
@@ -138,9 +140,52 @@
                   </Label>
                </children>
             </HBox>
-            <VBox alignment="CENTER" prefHeight="262.0" prefWidth="189.0" style="-fx-background-color: #FCF9F9;">
+            <VBox prefHeight="146.0" prefWidth="169.0">
+               <children>
+                  <Label text="Total Income" textFill="#433d3d">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="TotalIncome" text="\$">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Total Expense" textFill="#433d3d">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="TotalExpense" text="\$">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Balance" textFill="#433d3d">
+                     <font>
+                        <Font name="Cambria" size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="Balance" text="\$">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
                <VBox.margin>
-                  <Insets top="150.0" />
+                  <Insets left="20.0" top="15.0" />
+               </VBox.margin>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="226.0" prefWidth="189.0" style="-fx-background-color: #FCF9F9;">
+               <VBox.margin>
+                  <Insets top="20.0" />
                </VBox.margin>
                <children>
                   <Button mnemonicParsing="false" onAction="#CurrentMonClicked" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #239341; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Current Month" textFill="WHITE">
@@ -150,6 +195,9 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#NewExpenseClicked" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #239341; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="New Expense" textFill="WHITE">
                      <font>
@@ -162,9 +210,20 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
+                  <Button mnemonicParsing="false" onAction="#NewIncomeClicked" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #239341; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="New Income" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="20.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
             </VBox>
-            <Button mnemonicParsing="false" onAction="#LogoutClicked" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #EDBD3A; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Log out" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#LogoutClicked" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #EDBD3A; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Log out" textFill="WHITE">
                <font>
                   <Font name="Cambria Bold" size="18.0" />
                </font>

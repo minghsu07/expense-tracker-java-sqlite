@@ -84,41 +84,43 @@ public class DBConnection {
                         "      CATEGORY_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                                 "      CATEGORY_NAME VARCHAR(25) NOT NULL\n" +
                                 "  );");
-//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('HOUSING');");
-//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('TRANSPORTATION')");
-//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('UTILITIES');");
-//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('FOOD');");
-//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('SAVING');");
-//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('LOAN');");
-//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('HEALTHCARE');");
-//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('CHILD EXPENSE');");
-//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('PERSONAL CARE');");
-//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('PETS');");
-//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('CLOTHES');");
-//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('HOME SUPPLIES');");
-//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('FUN');");
-//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('MEMBERSHIPS');");
-//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('OTHERS');");
-//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('INSURANCE');");
-
-
-                    stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('INCOME');");
-                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('RENTAL');");
-                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('ELECTRICITY BILL');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('INCOME');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('HOUSING');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('TRANSPORTATION')");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('UTILITIES');");
                 stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('FOOD');");
-                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('GROCERY');");
-                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('PHONE BILL');");
-                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('HOME SUPPLIES');");
-                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('GASOLINE');");
                 stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('SAVING');");
-                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('ENTERTAINMENT');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('LOAN');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('HEALTHCARE');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('CHILD EXPENSE');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('PERSONAL CARE');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('PETS');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('CLOTHES');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('HOME SUPPLIES');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('FUN');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('MEMBERSHIPS');");
+                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('OTHERS');");
                 stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('INSURANCE');");
-                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('INVESTMENT(US)');");
-                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('INVESTMENT(TW)');");
-                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('TUITION');");
-                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('CAR LOAN');");
-                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('FUND FOR PARENTS');");
-                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('TRAVEL FUND');");
+
+
+
+//                    stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('INCOME');");
+//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('RENTAL');");
+//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('ELECTRICITY BILL');");
+//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('FOOD');");
+//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('GROCERY');");
+//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('PHONE BILL');");
+//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('HOME SUPPLIES');");
+//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('GASOLINE');");
+//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('SAVING');");
+//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('ENTERTAINMENT');");
+//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('INSURANCE');");
+//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('INVESTMENT(US)');");
+//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('INVESTMENT(TW)');");
+//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('TUITION');");
+//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('CAR LOAN');");
+//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('FUND FOR PARENTS');");
+//                stmt.addBatch("Insert into EX_CATEGORY (CATEGORY_NAME) values ('TRAVEL FUND');");
 
                 stmt.addBatch("CREATE TABLE EX_EXPENSE(\n" +
                         "      EXPENSE_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +

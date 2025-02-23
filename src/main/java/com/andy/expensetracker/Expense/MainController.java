@@ -301,7 +301,7 @@ public class MainController  {
     }
 
     public void LogoutClicked(ActionEvent event) throws Exception{
-
+        Login.SQLConn.getConnection().close();
         FXMLLoader loader=new FXMLLoader(App.class.getResource("Login.fxml"));
         LoginController loginController=new LoginController(stage);
         loader.setController(loginController);

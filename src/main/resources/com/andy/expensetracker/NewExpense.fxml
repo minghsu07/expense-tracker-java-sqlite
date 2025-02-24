@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import com.andy.expensetracker.EditableComboBoxFilter?>
 
 <AnchorPane maxHeight="650.0" maxWidth="1070.0" prefHeight="650.0" prefWidth="1070.0" style="-fx-background-color: CAEDCA;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
 <!--   <AnchorPane maxHeight="650.0" maxWidth="1070.0" prefHeight="650.0" prefWidth="1070.0" style="-fx-background-color: CAEDCA;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">-->
@@ -32,17 +33,15 @@
                   <Insets left="50.0" top="15.0" />
                </VBox.margin>
                <children>
-                  <Label text="Item:" textFill="WHITE">
+
+                  <Label text="Category:" textFill="WHITE">
                      <font>
                         <Font name="Cambria Bold" size="18.0" />
                      </font>
+
                   </Label>
-                  <TextField fx:id="Item" maxHeight="40.0" maxWidth="400.0" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="400.0">
-                     <VBox.margin>
-                        <Insets top="5.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Label text="Category:" textFill="WHITE">
+                  <ComboBox fx:id="Combo_Category" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="400.0" />
+                  <Label text="Item:" textFill="WHITE">
                      <font>
                         <Font name="Cambria Bold" size="18.0" />
                      </font>
@@ -50,7 +49,11 @@
                         <Insets top="15.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox fx:id="Combo_Category" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="400.0" />
+                  <EditableComboBoxFilter fx:id="Item" maxHeight="40.0" maxWidth="400.0" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="400.0">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </EditableComboBoxFilter>
                   <Label text="Amount:" textFill="WHITE">
                      <font>
                         <Font name="Cambria Bold" size="18.0" />

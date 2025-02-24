@@ -10,15 +10,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="110aba21-2191-4ca8-a3dc-6fe61fcf0a74" name="Changes" comment="Added Login page">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/ExpenseTracker_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/ExpenseTracker_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/EditableComboBoxFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Login/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Login/UserSettingsDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QueryStatement.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Expense/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Expense/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Expense/NewExpense.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Expense/NewExpense.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Expense/NewIncome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Expense/NewIncome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Expense/UpdateExpenseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Expense/UpdateExpenseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Login/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Login/LoginModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Login/LoginModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Login/NewUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Login/NewUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/NewExpense.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/NewExpense.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/UpdateExpense.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/UpdateExpense.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,8 +39,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="module-info" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -80,6 +87,9 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\andyh\IdeaProjects\ExpenseTracker\src\main\resources\com\andy\expensetracker\icons" />
       <recent name="C:\Users\andyh\IdeaProjects\ExpenseTracker\src\main\resources\com\andy\expensetracker" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.andy.expensetracker" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.andy.expensetracker.Expense" />
@@ -140,5 +150,15 @@
     <MESSAGE value="init commit" />
     <MESSAGE value="Added Login page" />
     <option name="LAST_COMMIT_MESSAGE" value="Added Login page" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.ClassNotFoundException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

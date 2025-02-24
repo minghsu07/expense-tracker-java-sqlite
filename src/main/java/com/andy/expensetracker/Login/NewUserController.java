@@ -1,9 +1,11 @@
 package com.andy.expensetracker.Login;
 
 import com.andy.expensetracker.App;
+import com.andy.expensetracker.SceneLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -12,14 +14,17 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class NewUserController {
-    private Scene scene;
-    private Stage stage;
-    private Parent root;
+//    private Scene scene;
+//    private Stage stage;
+//    private Parent root;
     private LoginModel loginmodel=new LoginModel();
 
-    public NewUserController(Stage stage){
-        this.stage=stage;
+    public NewUserController(){
+
     }
+//    public NewUserController(Stage stage){
+//        this.stage=stage;
+//    }
 
     @FXML
     private TextField Username,RetryField;
@@ -39,13 +44,18 @@ public class NewUserController {
 
     @FXML
     void handleHomeClicked(ActionEvent event) throws IOException {
-        FXMLLoader loader=new FXMLLoader(App.class.getResource("Login.fxml"));
-        LoginController loginController=new LoginController(stage);
-        loader.setController(loginController);
-        root=loader.load();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+
+        LoginController loginController=new LoginController();
+        Stage currentStage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        SceneLoader.loadScene("Login.fxml",currentStage, loginController);
+
+//        FXMLLoader loader=new FXMLLoader(App.class.getResource("Login.fxml"));
+//        LoginController loginController=new LoginController(stage);
+//        loader.setController(loginController);
+//        root=loader.load();
+//        scene=new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
     }
 
     @FXML
@@ -66,13 +76,18 @@ public class NewUserController {
             alert.show();
         }else{
             if(loginmodel.Singup(username,passwd)){
-                FXMLLoader loader=new FXMLLoader(App.class.getResource("Login.fxml"));
-                LoginController loginController=new LoginController(stage);
-                loader.setController(loginController);
-                root=loader.load();
-                scene=new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+
+                LoginController loginController=new LoginController();
+                Stage currentStage=(Stage)((Node)event.getSource()).getScene().getWindow();
+                SceneLoader.loadScene("NewUserPage.fxml",currentStage, loginController);
+
+//                FXMLLoader loader=new FXMLLoader(App.class.getResource("Login.fxml"));
+//                LoginController loginController=new LoginController(stage);
+//                loader.setController(loginController);
+//                root=loader.load();
+//                scene=new Scene(root);
+//                stage.setScene(scene);
+//                stage.show();
 
                 Alert msg=new Alert(Alert.AlertType.INFORMATION,"\""+username+"\" is created successfully!!!");
                 msg.setHeaderText("Success");

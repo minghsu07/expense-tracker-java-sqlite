@@ -1,16 +1,18 @@
 package com.andy.expensetracker.Expense;
 
-import com.andy.expensetracker.Login.LoginModel;
-import com.andy.expensetracker.App;
+import com.andy.expensetracker.EditableComboBoxFilter;
+import com.andy.expensetracker.Login.User;
+import com.andy.expensetracker.SceneLoader;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.math.BigDecimal;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,14 +22,13 @@ import java.util.function.UnaryOperator;
 
 public class NewExpense {
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
 
-    private LoginModel Login;
+    User user = User.getInstance();
 
     @FXML
-    private TextField Item,Amount;
+    private TextField Amount;
+    @FXML
+    private EditableComboBoxFilter Item;
     @FXML
     private ComboBox Combo_Category;
     @FXML
@@ -36,20 +37,17 @@ public class NewExpense {
     @FXML
     private TextArea Description;
 
-    public NewExpense(Stage stage,LoginModel login){
-        Login=login;
-        this.stage=stage;
+    public NewExpense(){
+
     }
+
 
     public void handleHomeClicked(ActionEvent event) throws Exception{
 
-        FXMLLoader loader=new FXMLLoader(App.class.getResource("Main.fxml"));
-        MainController mainController=new MainController(stage,Login);
-        loader.setController(mainController);
-        root=loader.load();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        MainController mainController=new MainController();
+        Stage currentStage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        SceneLoader.loadScene("Main.fxml",currentStage, mainController);
+
     }
 
     public void initialize(){
@@ -63,8 +61,8 @@ public class NewExpense {
             alert.setContentText("You must fill in all required fields");
             alert.show();
         }else {
-            PreparedStatement PreStat=null;
-            String item=Item.getText();
+
+            String item=(String)Item.getSelectionModel().getSelectedItem();
             BigDecimal amount=new BigDecimal(Amount.getText().substring(1).toString());
             Category selectedItem=(Category)Combo_Category.getSelectionModel().getSelectedItem();
             int category_id=selectedItem.getID();
@@ -76,12 +74,15 @@ public class NewExpense {
                 desc = Description.getText();
 
             }
-            try{
-                String query="";
-                query="INSERT INTO EX_EXPENSE (USER_ID,ITEM,CATEGORY_ID,AMOUNT,CREATED_DATE,DESCRIPTION) VALUES(?,?,?,?,?,?)";
-//                query="INSERT INTO EX_EXPENSE (USER_ID,ITEM,CATEGORY_ID,AMOUNT,CREATED_DATE,DESCRIPTION) VALUES(?,?,?,?,?,'TEST')";
-                PreStat=Login.SQLConn.getConnection().prepareStatement(query);
-                PreStat.setInt(1,Login.getID());
+
+
+            String query="INSERT INTO EX_EXPENSE (USER_ID,ITEM,CATEGORY_ID,AMOUNT,CREATED_DATE,DESCRIPTION) VALUES(?,?,?,?,?,?)";
+
+            try(Connection conn=user.getSQLConn().getConnection();
+            PreparedStatement PreStat=conn.prepareStatement(query))
+            {
+
+                PreStat.setInt(1, user.getUserId());
                 PreStat.setString(2,item);
                 PreStat.setInt(3,category_id);
                 PreStat.setBigDecimal(4,amount);
@@ -99,10 +100,7 @@ public class NewExpense {
             catch (SQLException e){
                 e.printStackTrace();
             }
-            finally {
-//                Login.SQLConn.getConnection().close();
-                PreStat.close();
-            }
+
 
 
         }
@@ -120,18 +118,19 @@ public class NewExpense {
         Combo_Category.getItems().clear();
         ArrayList<Category> categories= new ArrayList<Category>();
 
-        try{
+
             String query="select category_id, Concat(" +
                     "upper(substring(category_name,1,1))," +
                     "Lower(substring(category_name,2,Length(category_name)))" +
                     ") as Name from ex_category where Name != \"Income\"";
-            PreparedStatement Prepstat=Login.SQLConn.getConnection().prepareStatement(query);
-            ResultSet result=Prepstat.executeQuery();
 
+        try(Connection conn=user.getSQLConn().getConnection();
+            PreparedStatement Prepstat=conn.prepareStatement(query))
+        {
+            ResultSet result=Prepstat.executeQuery();
             while(result.next()){
                 categories.add(new Category(result.getInt("Category_ID"),result.getString("Name")));
             }
-
         }
         catch(SQLException e){
             e.printStackTrace();
@@ -148,8 +147,10 @@ public class NewExpense {
             }
             return null;
         };
+//        Item.setCellFactory(param-> new EditableComboBoxFilter());
         Item.getStyleClass().addAll("NewExpense-font-style");
-        Item.setText("");
+        resetItemField();
+//        Item.setText("");
         TextFormatter<String> textFormatter=new TextFormatter<>(filter);
         Amount.setTextFormatter(textFormatter);
         Amount.getStyleClass().addAll("NewExpense-font-style");
@@ -193,5 +194,29 @@ public class NewExpense {
         SelectedDate.setValue(LocalDate.now());
         SelectedDate.getStyleClass().add("NewExpense-font-style");
         Description.setText("");
+    }
+
+
+    private void resetItemField(){
+        String query="SELECT DISTINCT E.ITEM AS ITEM " +
+                "FROM EX_EXPENSE AS E " +
+                "JOIN EX_CATEGORY AS C ON E.CATEGORY_ID=C.CATEGORY_ID " +
+                "WHERE E.USER_ID="+user.getUserId();
+
+        ObservableList<String> items= FXCollections.observableArrayList();
+
+        try(Connection conn=user.getSQLConn().getConnection();
+        PreparedStatement PrepStat=conn.prepareStatement(query))
+        {
+            ResultSet result=PrepStat.executeQuery();
+            while(result.next()){
+                items.add(result.getString("ITEM"));
+            }
+
+            Item.setItemsList(items);
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 }

@@ -26,4 +26,7 @@
     -fx-font-size: 12;
     -fx-font-weight: bold;
 }
-
+/* Hide the close (X) button */
+.dialog-pane .header .close-button {
+    -fx-graphic: null;
+}

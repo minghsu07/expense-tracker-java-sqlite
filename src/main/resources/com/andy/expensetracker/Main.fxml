@@ -22,17 +22,17 @@
    <children>
       <VBox layoutX="25.0" layoutY="36.0" prefHeight="570.0" prefWidth="830.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20;">
          <children>
-            <HBox alignment="TOP_CENTER" prefWidth="200.0">
+            <HBox alignment="CENTER_LEFT" prefWidth="200.0">
                <children>
                   <Label text="Year:">
                      <font>
                         <Font name="Cambria Bold" size="18.0" />
                      </font>
                      <HBox.margin>
-                        <Insets />
+                        <Insets left="30.0" />
                      </HBox.margin>
                   </Label>
-                  <ComboBox fx:id="Combo_Year" prefHeight="25.0" prefWidth="132.0">
+                  <ComboBox fx:id="Combo_Year" prefHeight="25.0" prefWidth="117.0">
                      <HBox.margin>
                         <Insets left="15.0" />
                      </HBox.margin>
@@ -45,7 +45,7 @@
                         <Insets left="25.0" />
                      </HBox.margin>
                   </Label>
-                  <ComboBox fx:id="Combo_Month" prefHeight="25.0" prefWidth="132.0">
+                  <ComboBox fx:id="Combo_Month" prefHeight="25.0" prefWidth="94.0">
                      <HBox.margin>
                         <Insets left="15.0" />
                      </HBox.margin>
@@ -63,6 +63,17 @@
                         <Insets left="15.0" />
                      </HBox.margin>
                   </ComboBox>
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#SearchClicked" prefHeight="34.0" prefWidth="94.0" style="-fx-background-color: #ED3818; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Search" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
                <VBox.margin>
                   <Insets top="30.0" />
@@ -70,15 +81,15 @@
             </HBox>
             <GridPane>
               <columnConstraints>
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="271.0" minWidth="10.0" prefWidth="250.0" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="271.0" minWidth="10.0" prefWidth="250.0" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="479.0" minWidth="0.0" prefWidth="440.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="407.0" minWidth="10.0" prefWidth="250.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="407.0" minWidth="10.0" prefWidth="250.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" onAction="#SearchClicked" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #ED3818; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Search" textFill="WHITE" GridPane.columnIndex="1">
+                  <Button fx:id="Button_PreviousMon" mnemonicParsing="false" onAction="#PreviousMonClicked" prefHeight="34.0" prefWidth="77.0" style="-fx-background-color: #337BD6; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="&lt;" textFill="WHITE">
                      <font>
                         <Font name="Cambria Bold" size="18.0" />
                      </font>
@@ -86,15 +97,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="Button_PreviousMon" onAction="#PreviousMonClicked" mnemonicParsing="false" prefHeight="34.0" prefWidth="77.0" style="-fx-background-color: #337BD6; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="&lt;" textFill="WHITE">
-                     <font>
-                        <Font name="Cambria Bold" size="18.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="Button_Nextmon" onAction="#NextMonClicked" mnemonicParsing="false" prefHeight="34.0" prefWidth="77.0" style="-fx-background-color: #337BD6; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="&gt;" textFill="WHITE" GridPane.columnIndex="2">
+                  <Button fx:id="Button_Nextmon" mnemonicParsing="false" onAction="#NextMonClicked" prefHeight="34.0" prefWidth="77.0" style="-fx-background-color: #337BD6; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="&gt;" textFill="WHITE" GridPane.columnIndex="2">
                      <font>
                         <Font name="Cambria Bold" size="18.0" />
                      </font>
@@ -104,7 +107,7 @@
                   </Button>
                </children>
                <VBox.margin>
-                  <Insets top="50.0" />
+                  <Insets top="35.0" />
                </VBox.margin>
             </GridPane>
             <TableView fx:id="ExpenseTable" prefHeight="421.0" prefWidth="830.0">
@@ -125,11 +128,18 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="80.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/userIcon.png" />
-                     </image>
-                  </ImageView>
+                  <Button mnemonicParsing="false" onAction="#UserClicked" prefHeight="67.0" prefWidth="72.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="66.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/userIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                   <Label fx:id="UserName" alignment="TOP_CENTER">
                      <font>
                         <Font name="Cambria Bold" size="24.0" />

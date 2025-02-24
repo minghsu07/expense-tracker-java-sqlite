@@ -9,29 +9,11 @@ import javafx.scene.control.Alert;
 import java.sql.*;
 
 public class LoginModel {
-//    Connection connection;
-//    public LoginModel(){
-//        connection= SqliteConnection.connector();
-//        if(connection ==null){
-//            System.exit(1);
-//        }
-//    }
-//
-//    public boolean isDbConnected(){
-//        try{
-//            return !connection.isClosed();
-//        }catch(SQLException e){
-//            e.printStackTrace();
-//            return false;
-//        }
-//
-//    }
 
     public DBConnection SQLConn;
-
-
-
     private int ID;
+    private String Username;
+
     public int getID() {
         return ID;
     }
@@ -39,17 +21,8 @@ public class LoginModel {
     public void setID(int ID) {
         this.ID = ID;
     }
-//    private final StringProperty username=new SimpleStringProperty();
-//    public StringProperty userProperty(){
-//        return username;
-//    }
-//    public final String getUsername(){
-//        return userProperty().get();
-//    }
-//    public final void setUsername(String name){
-//        userProperty().set(name);
-//    }
-    private String Username;
+
+
     public String getUsername() {
         return Username;
     }

@@ -3,9 +3,12 @@ package com.andy.expensetracker.Expense;
 import com.andy.expensetracker.App;
 import com.andy.expensetracker.Login.LoginController;
 import com.andy.expensetracker.Login.LoginModel;
+import com.andy.expensetracker.Login.User;
+import com.andy.expensetracker.SceneLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -21,11 +24,11 @@ import java.util.Optional;
 import java.util.function.UnaryOperator;
 
 public class UpdateExpenseController {
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
+//    private Stage stage;
+//    private Scene scene;
+//    private Parent root;
 
-    private LoginModel Login;
+    User user= User.getInstance();
     private ExpenseModel Expense;
     @FXML
     private TextField Item,Amount;
@@ -36,9 +39,9 @@ public class UpdateExpenseController {
     @FXML
     private TextArea Description;
 
-    public UpdateExpenseController(Stage stage,LoginModel login,ExpenseModel expense){
-        Login=login;
-        this.stage=stage;
+
+    public UpdateExpenseController(ExpenseModel expense){
+
         Expense=expense;
     }
 
@@ -108,13 +111,10 @@ public class UpdateExpenseController {
 
     public void handleHomeClicked(ActionEvent event) throws Exception{
 
-        FXMLLoader loader=new FXMLLoader(App.class.getResource("Main.fxml"));
-        MainController mainController=new MainController(stage,Login);
-        loader.setController(mainController);
-        root=loader.load();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        MainController mainController=new MainController();
+        Stage currentStage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        SceneLoader.loadScene("Main.fxml",currentStage,mainController);
+
     }
 
     public void Updateclicked(ActionEvent event) throws Exception{
@@ -122,7 +122,7 @@ public class UpdateExpenseController {
         PreparedStatement PreStat=null;
 
         Alert warning=new Alert(Alert.AlertType.WARNING,"You sure want to update?",ButtonType.YES,ButtonType.NO);
-        warning.setHeaderText("Delete Expense");
+        warning.setHeaderText("Update Expense");
 
         Optional<ButtonType> result = warning.showAndWait();
 
@@ -149,7 +149,7 @@ public class UpdateExpenseController {
                 String query = "";
                 query = "UPDATE EX_EXPENSE SET ITEM=? , CATEGORY_ID=?,AMOUNT=?,CREATED_DATE=?,DESCRIPTION=? WHERE EXPENSE_ID=?";
 
-                PreStat = Login.SQLConn.getConnection().prepareStatement(query);
+                PreStat = user.getSQLConn().getConnection().prepareStatement(query);
 
                 PreStat.setString(1, item);
                 PreStat.setInt(2, category_id);
@@ -184,11 +184,14 @@ public class UpdateExpenseController {
                 String query="";
                 query="DELETE FROM EX_EXPENSE WHERE EXPENSE_ID=?";
 
-                PreparedStatement PreStat= Login.SQLConn.getConnection().prepareStatement(query);
+                PreparedStatement PreStat= user.getSQLConn().getConnection().prepareStatement(query);
                 PreStat.setInt(1,Expense.getID());
                 PreStat.executeUpdate();
                 System.out.println("The expense has been deleted!");
-                handleHomeClicked(new ActionEvent());
+
+                MainController mainController=new MainController();
+                Stage currentStage=(Stage)((Node)event.getSource()).getScene().getWindow();
+                SceneLoader.loadScene("Main.fxml",currentStage,mainController);
             }
             catch (SQLException e){
                 e.printStackTrace();
@@ -205,7 +208,7 @@ public class UpdateExpenseController {
                     "upper(substring(category_name,1,1))," +
                     "Lower(substring(category_name,2,Length(category_name)))" +
                     ") as Name from ex_category";
-            PreparedStatement Prepstat=Login.SQLConn.getConnection().prepareStatement(query);
+            PreparedStatement Prepstat=user.getSQLConn().getConnection().prepareStatement(query);
             ResultSet result=Prepstat.executeQuery();
 
             while(result.next()){

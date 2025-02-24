@@ -15,8 +15,9 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
 
 
+
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Login.fxml"));
-        LoginController loginController=new LoginController(stage);
+        LoginController loginController=new LoginController();
         fxmlLoader.setController(loginController);
         Parent root=fxmlLoader.load();
 

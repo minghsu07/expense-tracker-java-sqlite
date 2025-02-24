@@ -1,43 +1,37 @@
 package com.andy.expensetracker.Expense;
 
+import com.andy.expensetracker.Login.User;
 import com.andy.expensetracker.Login.LoginController;
 import com.andy.expensetracker.Login.LoginModel;
 import com.andy.expensetracker.App;
+import com.andy.expensetracker.Login.UserSettingsDialog;
+import com.andy.expensetracker.SceneLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.URL;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.ResourceBundle;
 
 public class MainController  {
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-
-    private LoginModel Login;
+    User user = User.getInstance();
+//    private LoginModel Login=new LoginModel();
 //    private final Button showDetailButton = new Button("Detail");
     private final LocalDate localdate=LocalDate.now();
     private int Cur_year=localdate.getYear();
@@ -67,10 +61,9 @@ public class MainController  {
 
     private ObservableList<ExpenseModel> data;
 
-    public MainController(Stage stage,LoginModel login){
-        Login=login;
-        this.stage=stage;
 
+
+    public MainController(){
 
     }
 
@@ -84,7 +77,7 @@ public class MainController  {
 //        mon=localdate.getMonthValue();
 
 //        UserName.textProperty().bind(Login.userProperty());
-        UserName.setText(Login.getUsername());
+        UserName.setText(user.getUsername());
         Combo_Year.getItems().addAll(Gen_Years());
         Combo_Year.setValue(String.valueOf(Cur_year));
         Combo_Year.getStyleClass().addAll("comboBox-font-style");
@@ -168,31 +161,34 @@ public class MainController  {
 
 
 
-        getAllExpense(Cur_year,Cur_mon,-1, Login.getID());
+        getAllExpense(Cur_year,Cur_mon,-1, user.getUserId());
         ExpenseTable.setItems(data);
         ExpenseTable.setEditable(false);
         ExpenseTable.setOnMouseClicked((MouseEvent event) -> {
             if (event.getClickCount() == 2) { // Check if double-click
                 ExpenseModel selectedExpense = ExpenseTable.getSelectionModel().getSelectedItem();
                 if (selectedExpense != null) {
+                    UpdateExpenseController updateExpenseController=new UpdateExpenseController(selectedExpense);
+                    Stage currentStage=(Stage)((Node)event.getSource()).getScene().getWindow();
+                    SceneLoader.loadScene("UpdateExpense.fxml",currentStage,updateExpenseController);
                     FXMLLoader loader=new FXMLLoader(App.class.getResource("UpdateExpense.fxml"));
-                    UpdateExpenseController updateExpenseController=new UpdateExpenseController(stage,Login,selectedExpense);
-                    loader.setController(updateExpenseController);
-                    try {
-                        root=loader.load();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    scene=new Scene(root);
-
-                    stage.setScene(scene);
-                    stage.show();
+//                    UpdateExpenseController updateExpenseController=new UpdateExpenseController(stage,Login,selectedExpense);
+//                    loader.setController(updateExpenseController);
+//                    try {
+//                        root=loader.load();
+//                    } catch (IOException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                    scene=new Scene(root);
+//
+//                    stage.setScene(scene);
+//                    stage.show();
                 }
             }
         });
 //        getTotalIncome(Cur_year,Cur_mon,-1, Login.getID());
 //        getTotalExpense(Cur_year,Cur_mon,-1, Login.getID());
-        getBalance(Cur_year,Cur_mon,-1, Login.getID());
+        getBalance(Cur_year,Cur_mon,-1, user.getUserId());
 
     }
 
@@ -214,8 +210,8 @@ public class MainController  {
 
 //        getTotalIncome(year,mon,category_id, Login.getID());
 //        getTotalExpense(year,mon,category_id, Login.getID());
-        getBalance(Cur_year,Cur_mon,category_id, Login.getID());
-        getAllExpense(Cur_year,Cur_mon,category_id, Login.getID());
+        getBalance(Cur_year,Cur_mon,category_id, user.getUserId());
+        getAllExpense(Cur_year,Cur_mon,category_id, user.getUserId());
         ExpenseTable.setItems(data);
 
     }
@@ -229,10 +225,10 @@ public class MainController  {
         int category_id=selectedItem.getID();
 
         //for table view
-        getAllExpense(Cur_year,Cur_mon,category_id, Login.getID());
+        getAllExpense(Cur_year,Cur_mon,category_id, user.getUserId());
         ExpenseTable.setItems(data);
         //for labels
-        getBalance(Cur_year,Cur_mon,category_id, Login.getID());
+        getBalance(Cur_year,Cur_mon,category_id, user.getUserId());
     }
 
     public void PreviousMonClicked(ActionEvent event) throws Exception{
@@ -252,10 +248,10 @@ public class MainController  {
         int category_id=selectedItem.getID();
 
         //for table view
-        getAllExpense(Cur_year,Cur_mon,category_id, Login.getID());
+        getAllExpense(Cur_year,Cur_mon,category_id, user.getUserId());
         ExpenseTable.setItems(data);
         //for labels
-        getBalance(Cur_year,Cur_mon,category_id, Login.getID());
+        getBalance(Cur_year,Cur_mon,category_id, user.getUserId());
     }
 
     public void NextMonClicked(ActionEvent event) throws Exception{
@@ -274,41 +270,37 @@ public class MainController  {
         int category_id=selectedItem.getID();
 
         //for table view
-        getAllExpense(Cur_year,Cur_mon,category_id, Login.getID());
+        getAllExpense(Cur_year,Cur_mon,category_id, user.getUserId());
         ExpenseTable.setItems(data);
         //for labels
-        getBalance(Cur_year,Cur_mon,category_id, Login.getID());
+        getBalance(Cur_year,Cur_mon,category_id, user.getUserId());
     }
 
     public void NewExpenseClicked(ActionEvent event) throws Exception{
-        FXMLLoader loader=new FXMLLoader(App.class.getResource("NewExpense.fxml"));
-        NewExpense newExpense=new NewExpense(stage,Login);
-        loader.setController(newExpense);
-        root=loader.load();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        NewExpense newExpense=new NewExpense();
+        Stage currentStage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        SceneLoader.loadScene("NewExpense.fxml",currentStage,newExpense);
+
     }
 
     public void NewIncomeClicked(ActionEvent event) throws Exception{
-        FXMLLoader loader=new FXMLLoader(App.class.getResource("NewIncome.fxml"));
-        NewIncome newIncome=new NewIncome(stage,Login);
-        loader.setController(newIncome);
-        root=loader.load();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        NewIncome newIncome=new NewIncome();
+        Stage currentStage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        SceneLoader.loadScene("NewIncome.fxml",currentStage,newIncome);
+
     }
 
+    public void UserClicked(ActionEvent event) throws Exception{
+        UserSettingsDialog settingsDialog = new UserSettingsDialog();
+        settingsDialog.showSettingsDialog();
+    }
     public void LogoutClicked(ActionEvent event) throws Exception{
-        Login.SQLConn.getConnection().close();
-        FXMLLoader loader=new FXMLLoader(App.class.getResource("Login.fxml"));
-        LoginController loginController=new LoginController(stage);
-        loader.setController(loginController);
-        root=loader.load();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        user.logout();
+
+        LoginController loginController=new LoginController();
+        Stage currentStage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        SceneLoader.loadScene("Login.fxml",currentStage,loginController);
+
     }
 
     private ArrayList<String> Gen_Years(){
@@ -329,31 +321,42 @@ public class MainController  {
 
 
         data=null;
-        try{
-            String query="";
 
+
+
+//            if(category_id!=-1){
+//                query="SELECT E.EXPENSE_ID AS ID, STRFTIME('%F',CREATED_DATE) AS DATE," +
+//                        "CONCAT(UPPER(SUBSTRING(C.CATEGORY_NAME,1,1)),LOWER(SUBSTRING(C.CATEGORY_NAME,2,LENGTH(C.CATEGORY_NAME)))) AS CATEGORY_NAME," +
+//                        "E.ITEM AS ITEM," +
+//                        "printf(\"%.2f\", E.AMOUNT) AS AMOUNT, " +
+//                        "E.DESCRIPTION as DESCRIPTION " +
+//                        "FROM EX_EXPENSE AS E " +
+//                        "JOIN EX_CATEGORY AS C ON E.CATEGORY_ID=C.CATEGORY_ID " +
+//                        "WHERE E.USER_ID="+user_id+" AND C.CATEGORY_ID="+category_id+" AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))=?"+
+//                        " ORDER BY E.CREATED_DATE;";
+//            }else{
+//                query="SELECT E.EXPENSE_ID AS ID, STRFTIME('%F',CREATED_DATE) AS DATE," +
+//                        "CONCAT(UPPER(SUBSTRING(C.CATEGORY_NAME,1,1)),LOWER(SUBSTRING(C.CATEGORY_NAME,2,LENGTH(C.CATEGORY_NAME)))) AS CATEGORY_NAME," +
+//                        "E.ITEM AS ITEM," +
+//                        "printf(\"%.2f\", E.AMOUNT) AS AMOUNT, " +
+//                        "E.DESCRIPTION as DESCRIPTION " +
+//                        "FROM EX_EXPENSE AS E " +
+//                        "JOIN EX_CATEGORY AS C ON E.CATEGORY_ID=C.CATEGORY_ID " +
+//                        "WHERE E.USER_ID="+user_id+" AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))=?"+
+//                        " ORDER BY E.CREATED_DATE;";
+//            }
+            String query="SELECT E.EXPENSE_ID AS ID, STRFTIME('%F',CREATED_DATE) AS DATE," +
+                        "CONCAT(UPPER(SUBSTRING(C.CATEGORY_NAME,1,1)),LOWER(SUBSTRING(C.CATEGORY_NAME,2,LENGTH(C.CATEGORY_NAME)))) AS CATEGORY_NAME," +
+                        "E.ITEM AS ITEM," +
+                        "printf(\"%.2f\", E.AMOUNT) AS AMOUNT, " +
+                        "E.DESCRIPTION as DESCRIPTION " +
+                        "FROM EX_EXPENSE AS E " +
+                        "JOIN EX_CATEGORY AS C ON E.CATEGORY_ID=C.CATEGORY_ID " +
+                        "WHERE E.USER_ID="+user_id+" AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))=? ";
             if(category_id!=-1){
-                query="SELECT E.EXPENSE_ID AS ID, STRFTIME('%F',CREATED_DATE) AS DATE," +
-                        "CONCAT(UPPER(SUBSTRING(C.CATEGORY_NAME,1,1)),LOWER(SUBSTRING(C.CATEGORY_NAME,2,LENGTH(C.CATEGORY_NAME)))) AS CATEGORY_NAME," +
-                        "E.ITEM AS ITEM," +
-                        "printf(\"%.2f\", E.AMOUNT) AS AMOUNT, " +
-                        "E.DESCRIPTION as DESCRIPTION " +
-                        "FROM EX_EXPENSE AS E " +
-                        "JOIN EX_CATEGORY AS C ON E.CATEGORY_ID=C.CATEGORY_ID " +
-                        "WHERE E.USER_ID="+user_id+" AND C.CATEGORY_ID="+category_id+" AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))=?"+
-                        " ORDER BY E.CREATED_DATE;";
-            }else{
-                query="SELECT E.EXPENSE_ID AS ID, STRFTIME('%F',CREATED_DATE) AS DATE," +
-                        "CONCAT(UPPER(SUBSTRING(C.CATEGORY_NAME,1,1)),LOWER(SUBSTRING(C.CATEGORY_NAME,2,LENGTH(C.CATEGORY_NAME)))) AS CATEGORY_NAME," +
-                        "E.ITEM AS ITEM," +
-                        "printf(\"%.2f\", E.AMOUNT) AS AMOUNT, " +
-                        "E.DESCRIPTION as DESCRIPTION " +
-                        "FROM EX_EXPENSE AS E " +
-                        "JOIN EX_CATEGORY AS C ON E.CATEGORY_ID=C.CATEGORY_ID " +
-                        "WHERE E.USER_ID="+user_id+" AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))=?"+
-                        " ORDER BY E.CREATED_DATE;";
+                query +=" AND C.CATEGORY_ID=" + category_id;
             }
-
+            query+=" ORDER BY E.CREATED_DATE ";
             if(mon==0){
                 Selected_date=String.valueOf(year);
                 query=query.replace(",STRFTIME('%m',CREATED_DATE)","");
@@ -362,8 +365,9 @@ public class MainController  {
             }else{
                 Selected_date=String.valueOf(year)+String.format("%02d",mon);
             }
+        try(Connection conn=user.getSQLConn().getConnection();
+            PreparedStatement Prepstat=conn.prepareStatement(query)){
 
-            PreparedStatement Prepstat=Login.SQLConn.getConnection().prepareStatement(query);
             Prepstat.setString(1,Selected_date);
             ResultSet result=Prepstat.executeQuery();
 //            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -405,30 +409,42 @@ public class MainController  {
         double TotalExpense=0;
         String Selected_date="";
 
-        try {
-            String query = "";
-            if (category_id != -1) {
-                query = "SELECT printf(\"%.2f\",SUM(E.AMOUNT)) AS AMOUNT " +
-                        "FROM EX_EXPENSE AS E " +
-                        "JOIN EX_CATEGORY AS C ON E.CATEGORY_ID=C.CATEGORY_ID " +
-                        "WHERE E.USER_ID=" + user_id + " AND C.CATEGORY_ID=" + category_id + " AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))=? AND C.CATEGORY_ID!="+getIncome_ID()+
-                        " ORDER BY E.CREATED_DATE ;";
-            } else {
-                query = "SELECT printf(\"%.2f\",SUM(E.AMOUNT)) AS AMOUNT " +
-                        "FROM EX_EXPENSE AS E " +
-                        "JOIN EX_CATEGORY AS C ON E.CATEGORY_ID=C.CATEGORY_ID " +
-                        "WHERE E.USER_ID=" + user_id + " AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))=? AND C.CATEGORY_ID!="+getIncome_ID()+
-                        " ORDER BY E.CREATED_DATE ";
-            }
-            if(mon==0){
-                Selected_date=String.valueOf(year);
-                query=query.replace(",STRFTIME('%m',CREATED_DATE)","");
 
 
-            }else{
-                Selected_date=String.valueOf(year)+String.format("%02d",mon);
-            }
-            PreparedStatement Prepstat = Login.SQLConn.getConnection().prepareStatement(query);
+//        if (category_id != -1) {
+//            query = "SELECT printf(\"%.2f\",SUM(E.AMOUNT)) AS AMOUNT " +
+//                    "FROM EX_EXPENSE AS E " +
+//                    "JOIN EX_CATEGORY AS C ON E.CATEGORY_ID=C.CATEGORY_ID " +
+//                    "WHERE E.USER_ID=" + user_id + " AND C.CATEGORY_ID=" + category_id + " AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))=? AND C.CATEGORY_ID!="+getIncome_ID()+
+//                    " ORDER BY E.CREATED_DATE ;";
+//        } else {
+//            query = "SELECT printf(\"%.2f\",SUM(E.AMOUNT)) AS AMOUNT " +
+//                    "FROM EX_EXPENSE AS E " +
+//                    "JOIN EX_CATEGORY AS C ON E.CATEGORY_ID=C.CATEGORY_ID " +
+//                    "WHERE E.USER_ID=" + user_id + " AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))=? AND C.CATEGORY_ID!="+getIncome_ID()+
+//                    " ORDER BY E.CREATED_DATE ";
+//        }
+        String query = "SELECT printf(\"%.2f\",SUM(E.AMOUNT)) AS AMOUNT " +
+                    "FROM EX_EXPENSE AS E " +
+                    "JOIN EX_CATEGORY AS C ON E.CATEGORY_ID=C.CATEGORY_ID " +
+                    "WHERE E.USER_ID=" + user_id + " AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))=? AND C.CATEGORY_ID!="+getIncome_ID()+" ";
+
+        if(category_id!=-1){
+            query +=" AND C.CATEGORY_ID=" + category_id;
+       }
+        query+=" ORDER BY E.CREATED_DATE ";
+        if(mon==0){
+            Selected_date=String.valueOf(year);
+            query=query.replace(",STRFTIME('%m',CREATED_DATE)","");
+
+
+        }else{
+            Selected_date=String.valueOf(year)+String.format("%02d",mon);
+        }
+
+        try(Connection conn=user.getSQLConn().getConnection();
+            PreparedStatement Prepstat=conn.prepareStatement(query)){
+
             Prepstat.setString(1,Selected_date);
             ResultSet result = Prepstat.executeQuery();
 
@@ -450,28 +466,28 @@ public class MainController  {
         String Selected_date="";
 
         if(category_id!=getIncome_ID() && category_id!=-1){
-
             return TotalIncome;
         }
 
-        try {
-            String query = "";
-            query = "SELECT printf(\"%.2f\",SUM(E.AMOUNT)) AS AMOUNT " +
-                        "FROM EX_EXPENSE AS E " +
-                        "JOIN EX_CATEGORY AS C ON E.CATEGORY_ID=C.CATEGORY_ID " +
-                        "WHERE E.USER_ID=" + user_id + " AND C.CATEGORY_id="+getIncome_ID() +" AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))=?" +
-                        " ORDER BY E.CREATED_DATE;";
-            if(mon==0){
-                Selected_date=String.valueOf(year);
-                query=query.replace(",STRFTIME('%m',CREATED_DATE)","");
+
+        String query = "SELECT printf(\"%.2f\",SUM(E.AMOUNT)) AS AMOUNT " +
+                    "FROM EX_EXPENSE AS E " +
+                    "JOIN EX_CATEGORY AS C ON E.CATEGORY_ID=C.CATEGORY_ID " +
+                    "WHERE E.USER_ID=" + user_id + " AND C.CATEGORY_id="+getIncome_ID() +" AND CONCAT(STRFTIME('%Y',CREATED_DATE),STRFTIME('%m',CREATED_DATE))=?" +
+                    " ORDER BY E.CREATED_DATE;";
+        if(mon==0){
+            Selected_date=String.valueOf(year);
+            query=query.replace(",STRFTIME('%m',CREATED_DATE)","");
 
 
-            }else{
-                Selected_date=String.valueOf(year)+String.format("%02d",mon);
-            }
-            PreparedStatement Prepstat = Login.SQLConn.getConnection().prepareStatement(query);
-            Prepstat.setString(1,Selected_date);
-            ResultSet result = Prepstat.executeQuery();
+        }else{
+            Selected_date=String.valueOf(year)+String.format("%02d",mon);
+        }
+        try (Connection conn=user.getSQLConn().getConnection();
+             PreparedStatement preStat = conn.prepareStatement(query)){
+
+            preStat.setString(1,Selected_date);
+            ResultSet result = preStat.executeQuery();
 
             while(result.next()){
                 TotalIncome=result.getDouble("AMOUNT");
@@ -500,13 +516,14 @@ public class MainController  {
     private ArrayList<Category> getCategory(){
 
         ArrayList<Category> categories= new ArrayList<Category>();
+        String query="select category_id, Concat(" +
+                                            "upper(substring(category_name,1,1))," +
+                                            "Lower(substring(category_name,2,Length(category_name)))" +
+                                            ") as Name from ex_category";
 
-        try{
-            String query="select category_id, Concat(" +
-                                                "upper(substring(category_name,1,1))," +
-                                                "Lower(substring(category_name,2,Length(category_name)))" +
-                                                ") as Name from ex_category";
-            PreparedStatement Prepstat=Login.SQLConn.getConnection().prepareStatement(query);
+        try(Connection conn=user.getSQLConn().getConnection();
+            PreparedStatement Prepstat=conn.prepareStatement(query))
+        {
             ResultSet result=Prepstat.executeQuery();
 
             while(result.next()){
@@ -521,8 +538,11 @@ public class MainController  {
     }
 
     private int getIncome_ID(){
-        try{
-            PreparedStatement Prestat=Login.SQLConn.getConnection().prepareStatement("select category_id from ex_category where category_name=\"INCOME\";");
+
+        String query="select category_id from ex_category where category_name=\"INCOME\"";
+        try(Connection conn=user.getSQLConn().getConnection();
+                PreparedStatement Prestat=conn.prepareStatement(query))
+        {
             ResultSet resultSet=Prestat.executeQuery();
             while(resultSet.next()){
                 Income_ID= resultSet.getInt("category_id");

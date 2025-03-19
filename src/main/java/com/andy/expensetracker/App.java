@@ -1,7 +1,7 @@
 package com.andy.expensetracker;
 
 
-import com.andy.expensetracker.Login.LoginController;
+import com.andy.expensetracker.Controllers.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +16,7 @@ public class App extends Application {
 
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("views/Login.fxml"));
         LoginController loginController=new LoginController();
         fxmlLoader.setController(loginController);
         Parent root=fxmlLoader.load();

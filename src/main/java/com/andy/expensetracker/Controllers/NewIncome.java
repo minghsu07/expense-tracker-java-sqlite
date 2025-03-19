@@ -1,15 +1,10 @@
-package com.andy.expensetracker.Expense;
+package com.andy.expensetracker.Controllers;
 
-import com.andy.expensetracker.App;
-import com.andy.expensetracker.Login.LoginModel;
-import com.andy.expensetracker.Login.User;
+import com.andy.expensetracker.Models.User;
 import com.andy.expensetracker.SceneLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
@@ -19,7 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.function.UnaryOperator;
 
 public class NewIncome {
@@ -46,7 +40,7 @@ public class NewIncome {
 
         MainController mainController=new MainController();
         Stage currentStage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        SceneLoader.loadScene("Main.fxml",currentStage, mainController);
+        SceneLoader.loadScene("views/Main.fxml",currentStage, mainController);
 
     }
 
@@ -104,9 +98,11 @@ public class NewIncome {
     }
 
     private void setIncomeID(){
-        String query="SELECT CATEGORY_ID FROM EX_CATEGORY WHERE CATEGORY_NAME='INCOME'";
+        String query="SELECT CATEGORY_ID FROM EX_CATEGORY WHERE CATEGORY_NAME='Income' and user_id=?";
         try(Connection conn=user.getSQLConn().getConnection();
             PreparedStatement stat=conn.prepareStatement(query)){
+
+            stat.setInt(1,user.getUserId());
             ResultSet result= stat.executeQuery();
             while(result.next()){
                 IncomeID=result.getInt("CATEGORY_ID");
@@ -121,28 +117,7 @@ public class NewIncome {
     }
 
 
-    private ArrayList<Category> getCategory(){
 
-        ArrayList<Category> categories= new ArrayList<Category>();
-
-        try{
-            String query="select category_id, Concat(" +
-                    "upper(substring(category_name,1,1))," +
-                    "Lower(substring(category_name,2,Length(category_name)))" +
-                    ") as Name from ex_category";
-            PreparedStatement Prepstat=user.getSQLConn().getConnection().prepareStatement(query);
-            ResultSet result=Prepstat.executeQuery();
-
-            while(result.next()){
-                categories.add(new Category(result.getInt("Category_ID"),result.getString("Name")));
-            }
-
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-        }
-        return categories;
-    }
 
     private void resetFields(){
         // Define a filter to allow only digits

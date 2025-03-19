@@ -4,9 +4,9 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -27,7 +27,7 @@
             </children>
         </AnchorPane>
       <HBox alignment="CENTER_RIGHT" layoutX="359.0" prefHeight="80.0" prefWidth="520.0" />
-      <VBox layoutX="504.0" layoutY="91.0" prefHeight="373.0" prefWidth="520.0">
+      <VBox layoutX="499.0" layoutY="60.0" prefHeight="486.0" prefWidth="520.0">
          <children>
             <Label text="New User">
                <font>
@@ -42,7 +42,7 @@
                   <Font name="Cambria Bold" size="20.0" />
                </font>
                <VBox.margin>
-                  <Insets top="30.0" />
+                  <Insets top="15.0" />
                </VBox.margin>
             </Label>
             <TextField fx:id="Username" maxHeight="34.0" maxWidth="280.0" prefHeight="34.0" prefWidth="280.0">
@@ -68,19 +68,6 @@
                         <Font name="Cambria" size="18.0" />
                      </font>
                   </PasswordField>
-                  <TextField fx:id="PasswordField" maxHeight="34.0" maxWidth="280.0" prefHeight="34.0" prefWidth="280.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
-                     <font>
-                        <Font name="Cambria" size="18.0" />
-                     </font></TextField>
-                  <ToggleButton fx:id="ShowPasswdToggle" layoutX="246.0" layoutY="3.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="18.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons/eyeicon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </ToggleButton>
                </children>
             </AnchorPane>
             <Label text="Retry Password:">
@@ -98,27 +85,44 @@
                         <Font name="Cambria" size="18.0" />
                      </font>
                   </PasswordField>
-                  <TextField fx:id="RetryField" maxHeight="34.0" maxWidth="280.0" prefHeight="34.0" prefWidth="280.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
-                     <font>
-                        <Font name="Cambria" size="18.0" />
-                     </font></TextField>
-                  <ToggleButton fx:id="ShowRetryToggle" layoutX="246.0" layoutY="3.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="18.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons/eyeicon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </ToggleButton>
                </children>
             </AnchorPane>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Manage Categories">
+                     <font>
+                        <Font name="Cambria Bold" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox prefHeight="30.0" prefWidth="218.0">
+                     <children>
+                        <Button fx:id="addCategoryButton" mnemonicParsing="false" text="Add Category" />
+                        <Button fx:id="removeCategoryButton" mnemonicParsing="false" text="Remove Category">
+                           <HBox.margin>
+                              <Insets left="25.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <ListView fx:id="categoryListView" maxWidth="279.0" minWidth="200.0" prefHeight="135.0" prefWidth="279.0">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </ListView>
+               </children>
+            </VBox>
          </children>
          <padding>
             <Insets left="130.0" />
          </padding>
       </VBox>
-      <VBox alignment="TOP_CENTER" layoutX="521.0" layoutY="464.0" prefHeight="128.0" prefWidth="520.0">
+      <VBox alignment="TOP_CENTER" layoutX="521.0" layoutY="540.0" prefHeight="80.0" prefWidth="520.0">
          <padding>
             <Insets top="30.0" />
          </padding>
@@ -140,7 +144,7 @@
          <graphic>
             <ImageView fitHeight="56.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@icons/home.png" />
+                  <Image url="@../icons/home.png" />
                </image>
             </ImageView>
          </graphic>

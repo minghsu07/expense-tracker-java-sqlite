@@ -1,20 +1,17 @@
-package com.andy.expensetracker.Expense;
+package com.andy.expensetracker.Controllers;
 
-import com.andy.expensetracker.App;
-import com.andy.expensetracker.Login.LoginController;
-import com.andy.expensetracker.Login.LoginModel;
-import com.andy.expensetracker.Login.User;
+import com.andy.expensetracker.Models.Category;
+import com.andy.expensetracker.Models.ExpenseModel;
+import com.andy.expensetracker.Models.User;
 import com.andy.expensetracker.SceneLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.math.BigDecimal;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,9 +21,7 @@ import java.util.Optional;
 import java.util.function.UnaryOperator;
 
 public class UpdateExpenseController {
-//    private Stage stage;
-//    private Scene scene;
-//    private Parent root;
+
 
     User user= User.getInstance();
     private ExpenseModel Expense;
@@ -62,7 +57,7 @@ public class UpdateExpenseController {
         };
 
         TextFormatter<String> textFormatter=new TextFormatter<>(filter);
-        Amount.setText(Expense.getAmount());
+        Amount.setText("$"+Expense.getAmount().toString());
         Amount.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.startsWith("$")) {
                 Amount.setText("$" + newValue.replaceAll("[^0-9.]", "")); // Remove invalid characters
@@ -113,7 +108,7 @@ public class UpdateExpenseController {
 
         MainController mainController=new MainController();
         Stage currentStage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        SceneLoader.loadScene("Main.fxml",currentStage,mainController);
+        SceneLoader.loadScene("views/Main.fxml",currentStage,mainController);
 
     }
 
@@ -191,7 +186,7 @@ public class UpdateExpenseController {
 
                 MainController mainController=new MainController();
                 Stage currentStage=(Stage)((Node)event.getSource()).getScene().getWindow();
-                SceneLoader.loadScene("Main.fxml",currentStage,mainController);
+                SceneLoader.loadScene("views/Main.fxml",currentStage,mainController);
             }
             catch (SQLException e){
                 e.printStackTrace();
@@ -203,12 +198,14 @@ public class UpdateExpenseController {
 
         ArrayList<Category> categories= new ArrayList<Category>();
 
-        try{
-            String query="select category_id, Concat(" +
-                    "upper(substring(category_name,1,1))," +
-                    "Lower(substring(category_name,2,Length(category_name)))" +
-                    ") as Name from ex_category";
-            PreparedStatement Prepstat=user.getSQLConn().getConnection().prepareStatement(query);
+        String query="select category_id, Concat(" +
+                "upper(substring(category_name,1,1))," +
+                "Lower(substring(category_name,2,Length(category_name)))" +
+                ") as Name from ex_category where user_id=?";
+        try(Connection conn=user.getSQLConn().getConnection();
+            PreparedStatement Prepstat=conn.prepareStatement(query)){
+
+            Prepstat.setInt(1,user.getUserId());
             ResultSet result=Prepstat.executeQuery();
 
             while(result.next()){

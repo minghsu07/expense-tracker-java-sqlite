@@ -1,4 +1,4 @@
-package com.andy.expensetracker.Expense;
+package com.andy.expensetracker.Models;
 
 public class Category {
     public int getID() {

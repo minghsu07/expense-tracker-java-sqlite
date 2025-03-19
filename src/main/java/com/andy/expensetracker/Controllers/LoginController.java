@@ -1,5 +1,6 @@
-package com.andy.expensetracker.Login;
-import com.andy.expensetracker.Expense.MainController;
+package com.andy.expensetracker.Controllers;
+import com.andy.expensetracker.Models.LoginModel;
+import com.andy.expensetracker.Models.User;
 import com.andy.expensetracker.SceneLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,19 +16,12 @@ import java.io.IOException;
 
 public class LoginController  {
 
-//    private Stage stage;
-//    private Scene scene;
-//    private Parent root;
-
     public LoginModel loginModel=new LoginModel();
 
     public LoginController(){
 
     }
 
-//    public LoginController(Stage stage){
-//        this.stage=stage;
-//    }
 
     @FXML
     private TextField Username;
@@ -46,16 +40,8 @@ public class LoginController  {
 
         NewUserController newUserController=new NewUserController();
         Stage currentStage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        SceneLoader.loadScene("NewUserPage.fxml",currentStage, newUserController);
+        SceneLoader.loadScene("views/NewUserPage.fxml",currentStage, newUserController);
 
-//        FXMLLoader loader=new FXMLLoader(App.class.getResource("NewUserPage.fxml"));
-//        NewUserController newUserController=new NewUserController(stage);
-//        loader.setController(newUserController);
-//        root=loader.load();
-////        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-//        scene=new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
     }
 
 
@@ -72,7 +58,7 @@ public class LoginController  {
             //go to main page
             MainController mainController=new MainController();
             Stage currentStage=(Stage)((Node)event.getSource()).getScene().getWindow();
-            SceneLoader.loadScene("Main.fxml",currentStage, mainController);
+            SceneLoader.loadScene("views/Main.fxml",currentStage, mainController);
 
         }else{
 
@@ -86,8 +72,7 @@ public class LoginController  {
 
 
     public void initialize(){
-//        Username.setText("Andy");
-//        Password.setText("andy");
+
         textfield.setVisible(false);
         showPasswordToggle.setOnAction(event -> {
             if (showPasswordToggle.isSelected()) {

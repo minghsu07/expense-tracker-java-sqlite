@@ -1,16 +1,14 @@
-package com.andy.expensetracker.Expense;
+package com.andy.expensetracker.Models;
 
 import javafx.scene.control.Button;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class ExpenseModel {
     private int ID;
     private String Item;
     private String Category;
-    private BigDecimal Amount;
+    private Double Amount;
     private LocalDate Date;
     private String Description;
     private Button Button;
@@ -23,7 +21,7 @@ public class ExpenseModel {
         this.ID = ID;
     }
 
-    public ExpenseModel(int id, String item, String category, BigDecimal amount, LocalDate date,String description){
+    public ExpenseModel(int id, String item, String category, Double amount, LocalDate date,String description){
         ID=id;
         Item=item;
         Category=category;
@@ -52,11 +50,11 @@ public class ExpenseModel {
         Category = category;
     }
 
-    public String getAmount() {
-        return "$"+Amount;
+    public Double getAmount() {
+        return Amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(Double amount) {
         Amount = amount;
     }
 

@@ -1,4 +1,4 @@
-package com.andy.expensetracker;
+package com.andy.expensetracker.Components;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +17,9 @@ public class EditableComboBoxFilter extends ComboBox<String> {
 
         this.getEditor().textProperty().addListener((observable,oldValue,newValue)->{
 
-            filterItems(newValue);
+                filterItems(newValue);
+
+
         });
 
         this.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -25,6 +27,7 @@ public class EditableComboBoxFilter extends ComboBox<String> {
         });
 
         // Ensure that we display matching items, even when the user is typing
+
         this.setCellFactory(param -> new ListCell<String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
@@ -46,20 +49,31 @@ public class EditableComboBoxFilter extends ComboBox<String> {
     }
     private void filterItems(String query){
 
-        if(query.isEmpty()){
-            this.setItems(fullList);
-        }else{
-            ObservableList<String> filteredList=FXCollections.observableArrayList();
 
+
+        ObservableList<String> filteredList;
+        if(query.isEmpty()){
+            filteredList=fullList;
+        }else{
+            filteredList=FXCollections.observableArrayList();
             for(String item:fullList){
 
                 if(item.toLowerCase().startsWith(query.toLowerCase())){
                     filteredList.add(item);
                 }
             }
-            this.setItems(filteredList);
-            this.show();
+
         }
+
+
+
+        if(query.isEmpty()){
+            this.getSelectionModel().clearSelection();
+            this.setItems(fullList);
+        }
+
+        this.setItems(filteredList);
+        this.show();
 
     }
 }

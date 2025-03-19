@@ -75,7 +75,7 @@
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@icons/eyeicon.png" />
+                              <Image url="@../icons/eyeicon.png" />
                            </image>
                         </ImageView>
                      </graphic>

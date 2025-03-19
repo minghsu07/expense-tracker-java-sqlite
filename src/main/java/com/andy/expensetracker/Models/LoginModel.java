@@ -1,9 +1,6 @@
-package com.andy.expensetracker.Login;
+package com.andy.expensetracker.Models;
 
 import com.andy.expensetracker.Database.DBConnection;
-import com.andy.expensetracker.Database.SqliteConnection;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.scene.control.Alert;
 
 import java.sql.*;

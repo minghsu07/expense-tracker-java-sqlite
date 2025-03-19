@@ -23,7 +23,7 @@ The Expense Tracker is a Java-based desktop application designed to help individ
 
 - Database: SQLite
 
-- UI Framework: JavaFX
+- **UI Framework:** JavaFX 22
 
 ## Installation
 ### Prerequisites
@@ -40,9 +40,10 @@ The Expense Tracker is a Java-based desktop application designed to help individ
 
 3. Open the project in your preferred Java IDE.
 
-4. Configure the database name in the config.properties located in resources folder
+4. Configure the database connection by updating the `config.properties` file located in the `resources` folder:
+   DB_Name=Expense.db
 
-5. Build and run the project.
+6. Build and run the project.
 
 
 ## Usage
@@ -52,3 +53,8 @@ The Expense Tracker is a Java-based desktop application designed to help individ
 3. Add new expenses by specifying the category, item name, amount, and date.
 4. View transaction history and filter expenses based on category or date range.
 
+## Contact
+
+For any questions or suggestions, please reach out via:
+- GitHub: [@minghsu07](https://github.com/minghsu07)
+- Email: minghsu07@gmail.com

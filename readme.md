@@ -20,9 +20,9 @@ The Expense Tracker is a Java-based desktop application designed to help individ
 
 # Technologies
 
-- Programming Language: Java
+- **Programming** Language: Java
 
-- Database: SQLite
+- **Database**: SQLite
 
 - **UI Framework:** JavaFX 22
 

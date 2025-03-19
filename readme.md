@@ -7,6 +7,7 @@ The Expense Tracker is a Java-based desktop application designed to help individ
 - [Technologies](#technologies)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Contact](#contact)
 
 
 ## Features

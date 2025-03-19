@@ -7,6 +7,7 @@ The Expense Tracker is a Java-based desktop application designed to help individ
 - [Technologies](#technologies)
 - [Installation](#installation)
 - [Usage](#usage)
+- [License](#license)
 - [Contact](#contact)
 
 
@@ -53,6 +54,10 @@ The Expense Tracker is a Java-based desktop application designed to help individ
 2. Create an account or log in.
 3. Add new expenses by specifying the category, item name, amount, and date.
 4. View transaction history and filter expenses based on category or date range.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Contact
 

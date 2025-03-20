@@ -29,10 +29,8 @@ The Expense Tracker is a Java-based desktop application designed to help individ
 
 ## Installation
 ### Prerequisites
-- Java Development Kit (JDK) 11 or later
-- JavaFX 22 (Depending on the configuration in fxml files)
 - A Java-compatible IDE (e.g., IntelliJ IDEA, Eclipse, NetBeans)
-- JDBC driver for SQLite
+- Apache Maven
 
 ### Setup
 1. Create a directory for this repository.

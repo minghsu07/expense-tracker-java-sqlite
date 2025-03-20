@@ -12,12 +12,6 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 <junit.version>5.10.0</junit.version>  </properties>
-  <repositories>
-    <repository>
-      <id>microsoft</id>
-      <url>https://maven.microsoft.com/</url>
-    </repository>
-  </repositories>
 
   <dependencies>
     <dependency>
@@ -31,25 +25,15 @@
       <artifactId>sqlite-jdbc</artifactId>
       <version>3.45.1.0</version> <!-- Replace with the latest version -->
     </dependency>
-<!--    <dependency>-->
-<!--      <groupId>org.openjfx</groupId>-->
-<!--      <artifactId>javafx-controls</artifactId>-->
-<!--      <version>22-ea+1122-ea+11</version>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>org.openjfx</groupId>-->
-<!--      <artifactId>javafx-fxml</artifactId>-->
-<!--      <version>22-ea+11</version>-->
-<!--    </dependency>-->
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
-      <version>17</version>
+      <version>22-ea+11</version>
     </dependency>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
-      <version>17</version>
+      <version>22-ea+11</version>
     </dependency>
 <dependency>
       <groupId>org.junit.jupiter</groupId>

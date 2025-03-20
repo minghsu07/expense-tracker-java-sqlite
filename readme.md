@@ -37,14 +37,14 @@ The Expense Tracker is a Java-based desktop application designed to help individ
 1. Create a directory for this repository.
 
 2. Clone the repository
-> git clone https://github.com/minghsu07/JavaFX-ExpenseTracker.git
+   > git clone https://github.com/minghsu07/JavaFX-ExpenseTracker.git
 
 3. Open the project in your preferred Java IDE.
 
-4. Configure the database connection by updating the `config.properties` file located in the `resources` folder:
-   DB_Name=Expense.db
+4. Configure the database connection by updating the `config.properties` file, located in the `resources` folder:
+   > DB_Name=Expense.db
 
-6. Build and run the project.
+5. Build and run the project.
 
 
 ## Usage

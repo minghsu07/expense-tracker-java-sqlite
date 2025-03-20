@@ -173,7 +173,7 @@ public class MainController  {
                     UpdateExpenseController updateExpenseController=new UpdateExpenseController(selectedExpense);
                     Stage currentStage=(Stage)((Node)event.getSource()).getScene().getWindow();
                     SceneLoader.loadScene("views/UpdateExpense.fxml",currentStage,updateExpenseController);
-                    FXMLLoader loader=new FXMLLoader(App.class.getResource("UpdateExpense.fxml"));
+
 
                 }
             }

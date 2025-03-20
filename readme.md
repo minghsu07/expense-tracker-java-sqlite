@@ -30,6 +30,7 @@ The Expense Tracker is a Java-based desktop application designed to help individ
 ## Installation
 ### Prerequisites
 - A Java-compatible IDE (e.g., IntelliJ IDEA, Eclipse, NetBeans)
+- Java Development Kit (JDK) 22
 - Apache Maven
 
 ### Setup

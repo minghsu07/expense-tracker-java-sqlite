@@ -7,8 +7,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -20,7 +18,7 @@
 <AnchorPane maxHeight="650.0" maxWidth="1070.0" prefHeight="650.0" prefWidth="1070.0" style="-fx-background-color: CAEDCA;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
 <!--<AnchorPane maxHeight="650.0" maxWidth="1070.0" prefHeight="650.0" prefWidth="1070.0" style="-fx-background-color: CAEDCA;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">-->
    <children>
-      <VBox layoutX="25.0" layoutY="36.0" prefHeight="570.0" prefWidth="830.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20;">
+      <VBox layoutX="24.0" layoutY="40.0" prefHeight="570.0" prefWidth="830.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20;">
          <children>
             <HBox alignment="CENTER_LEFT" prefWidth="200.0">
                <children>
@@ -124,33 +122,9 @@
             </TableView>
          </children>
       </VBox>
-      <VBox alignment="TOP_CENTER" layoutX="870.0" layoutY="36.0" prefHeight="570.0" prefWidth="189.0">
+      <VBox alignment="TOP_CENTER" layoutX="870.0" layoutY="26.0" prefHeight="605.0" prefWidth="189.0">
          <children>
-            <HBox alignment="CENTER_LEFT" prefWidth="200.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#UserClicked" prefHeight="67.0" prefWidth="72.0" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="66.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/userIcon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Label fx:id="UserName" alignment="TOP_CENTER">
-                     <font>
-                        <Font name="Cambria Bold" size="24.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-            </HBox>
-            <VBox prefHeight="146.0" prefWidth="169.0">
+            <VBox prefHeight="157.0" prefWidth="201.0">
                <children>
                   <Label text="Total Income" textFill="#433d3d">
                      <font>
@@ -190,10 +164,10 @@
                   </Label>
                </children>
                <VBox.margin>
-                  <Insets left="20.0" top="15.0" />
+                  <Insets left="15.0" top="35.0" />
                </VBox.margin>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="226.0" prefWidth="189.0" style="-fx-background-color: #FCF9F9;">
+            <VBox alignment="CENTER" prefHeight="376.0" prefWidth="189.0" style="-fx-background-color: #FCF9F9;">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>
@@ -228,22 +202,33 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <VBox.margin>
-                        <Insets bottom="10.0" top="20.0" />
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#UserClicked" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #818683; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Setting" textFill="#f8f8f8">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#LogoutClicked" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #EDBD3A; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Log out" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets top="20.0" />
                      </VBox.margin>
                   </Button>
                </children>
             </VBox>
-            <Button mnemonicParsing="false" onAction="#LogoutClicked" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #EDBD3A; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="Log out" textFill="WHITE">
-               <font>
-                  <Font name="Cambria Bold" size="18.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
          </children>
       </VBox>
    </children>

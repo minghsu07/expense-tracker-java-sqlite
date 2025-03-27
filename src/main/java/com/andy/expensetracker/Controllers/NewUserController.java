@@ -78,7 +78,6 @@ public class NewUserController {
                 Stage currentStage=(Stage)((Node)event.getSource()).getScene().getWindow();
                 SceneLoader.loadScene("views/Login.fxml",currentStage, loginController);
 
-
                 Alert msg=new Alert(Alert.AlertType.INFORMATION,"\""+username+"\" is created successfully!!!");
                 msg.setHeaderText("Success");
                 msg.setTitle("User Create");
@@ -115,6 +114,8 @@ public class NewUserController {
             }
         });
 
+        addCategoryButton.getStyleClass().add("addRemoveButton-style");
+        removeCategoryButton.getStyleClass().add("addRemoveButton-style");
 
         addCategoryButton.setOnAction(e -> {
             TextInputDialog dialog = new TextInputDialog();
@@ -131,13 +132,15 @@ public class NewUserController {
 
         removeCategoryButton.setOnAction(e -> {
             String selectedItem = categoryListView.getSelectionModel().getSelectedItem();
-            if (selectedItem.equals("Others")) {
-                Alert errordialog = new Alert(Alert.AlertType.ERROR);
-                errordialog.setHeaderText(selectedItem + " can not be removed.");
-                errordialog.showAndWait();
+            if(selectedItem!=null) {
+                if (selectedItem.equals("Others")) {
+                    Alert errordialog = new Alert(Alert.AlertType.ERROR);
+                    errordialog.setHeaderText(selectedItem + " can not be removed.");
+                    errordialog.showAndWait();
 
-            } else {
-                categories.remove(selectedItem);
+                } else {
+                    categories.remove(selectedItem);
+                }
             }
         });
     }

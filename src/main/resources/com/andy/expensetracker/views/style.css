@@ -30,3 +30,6 @@
 .dialog-pane .header .close-button {
     -fx-graphic: null;
 }
+.addRemoveButton-style{
+   -fx-cursor: hand;
+}

@@ -37,7 +37,7 @@ public class MainController  {
     private ObservableList<ExpenseModel> FilteredData=FXCollections.observableArrayList();
     private int Income_ID;
     @FXML
-    private Label UserName,TotalIncome,TotalExpense,Balance;
+    private Label TotalIncome,TotalExpense,Balance;
 
     @FXML
     private ComboBox Combo_Year,Combo_Month,Combo_Category;
@@ -71,7 +71,6 @@ public class MainController  {
     public void initialize()  {
 
 
-        UserName.setText(user.getUsername());
         Combo_Year.getItems().addAll(Gen_Years());
         Combo_Year.setValue(String.valueOf(Cur_year));
         Combo_Year.getStyleClass().addAll("comboBox-font-style");

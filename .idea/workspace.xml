@@ -9,14 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="110aba21-2191-4ca8-a3dc-6fe61fcf0a74" name="Changes" comment="">
+    <list default="true" id="110aba21-2191-4ca8-a3dc-6fe61fcf0a74" name="Changes" comment="Modify readme.md">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/ExpenseTracker_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/ExpenseTracker_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Controllers/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Controllers/NewUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Controllers/NewUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/views/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/views/Main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/views/NewUserPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/views/NewUserPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/views/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/views/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/ConfigLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/ConfigLoader.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +61,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/andyh/IdeaProjects/ExpenseTracker-LocalVersion/src/main/resources/com/andy/expensetracker",
+    "last_opened_file_path": "C:/Program Files/java/javafx-sdk-23.0.2/bin/vcruntime140_1.dll",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.19947734",
@@ -161,7 +158,9 @@
     <MESSAGE value="Added Login page" />
     <MESSAGE value="Update readme.md" />
     <MESSAGE value="Delete unused line of code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Delete unused line of code" />
+    <MESSAGE value="Modify button style" />
+    <MESSAGE value="Modify readme.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modify readme.md" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

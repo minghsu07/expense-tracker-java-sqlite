@@ -41,10 +41,7 @@ The Expense Tracker is a Java-based desktop application designed to help individ
 
 3. Open the project in your preferred Java IDE.
 
-4. Configure the database connection by updating the `config.properties` file, located in the `resources` folder:
-   > DB_Name=Expense.db
-
-5. Build and run the project.
+4. Build and run the project.
 
 
 ## Usage

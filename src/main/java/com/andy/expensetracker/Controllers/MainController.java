@@ -338,14 +338,27 @@ public class MainController  {
     public void FilterExpenses(int year,int mon,Category categoryName){
         String CategoryName=categoryName.getName();
         if(CategoryName=="All Categories"){
-            FilteredData=Alldata.filtered((expense)->
-                    expense.getDate().getYear()==year &&
-                            expense.getDate().getMonthValue()==mon);
+            if(mon==0){
+                FilteredData=Alldata.filtered((expense)->
+                        expense.getDate().getYear()==year );
+            }else{
+                FilteredData=Alldata.filtered((expense)->
+                        expense.getDate().getYear()==year &&
+                                expense.getDate().getMonthValue()==mon);
+            }
+
         }else{
-            FilteredData=Alldata.filtered((expense)->
-                    CategoryName.equals(expense.getCategory()) &&
-                            expense.getDate().getYear()==year &&
-                            expense.getDate().getMonthValue()==mon);
+            if(mon==0){
+                FilteredData=Alldata.filtered((expense)->
+                        CategoryName.equals(expense.getCategory()) &&
+                                expense.getDate().getYear()==year);
+            }else{
+                FilteredData=Alldata.filtered((expense)->
+                        CategoryName.equals(expense.getCategory()) &&
+                                expense.getDate().getYear()==year &&
+                                expense.getDate().getMonthValue()==mon);
+            }
+
         }
 
         ExpenseTable.setItems(FilteredData);
@@ -359,19 +372,34 @@ public class MainController  {
 
 
         if(CategoryName.equals("All Categories")){
-            income=Alldata.filtered((e)->
-                            "Income".equals(e.getCategory()) &&
-                                    e.getDate().getYear()==year &&
-                                    e.getDate().getMonthValue()==mon
-                    )
-                    .stream()
-                    .mapToDouble(ExpenseModel::getAmount).sum();
+            if(mon==0){
+                income=Alldata.filtered((e)->
+                                "Income".equals(e.getCategory()) &&
+                                        e.getDate().getYear()==year
+                        )
+                        .stream()
+                        .mapToDouble(ExpenseModel::getAmount).sum();
 
-            expense=Alldata.filtered(e ->
-                            !"Income".equals(e.getCategory())&&
-                                    e.getDate().getYear()==year &&
-                                    e.getDate().getMonthValue()==mon)
-                    .stream().mapToDouble(ExpenseModel::getAmount).sum();
+                expense=Alldata.filtered(e ->
+                                !"Income".equals(e.getCategory())&&
+                                        e.getDate().getYear()==year )
+                        .stream().mapToDouble(ExpenseModel::getAmount).sum();
+            }else{
+                income=Alldata.filtered((e)->
+                                "Income".equals(e.getCategory()) &&
+                                        e.getDate().getYear()==year &&
+                                        e.getDate().getMonthValue()==mon
+                        )
+                        .stream()
+                        .mapToDouble(ExpenseModel::getAmount).sum();
+
+                expense=Alldata.filtered(e ->
+                                !"Income".equals(e.getCategory())&&
+                                        e.getDate().getYear()==year &&
+                                        e.getDate().getMonthValue()==mon)
+                        .stream().mapToDouble(ExpenseModel::getAmount).sum();
+            }
+
         }else{
             income=0;
             expense=Alldata.filtered(e ->

@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.function.UnaryOperator;
 
 public class NewExpense {
@@ -136,7 +137,7 @@ public class NewExpense {
             }
         });
         Combo_Category.getItems().clear();
-        Combo_Category.getItems().addAll(user.getCategory());
+        Combo_Category.getItems().addAll(this.getCategory());
         Combo_Category.getStyleClass().addAll("NewExpense-font-style");
 //        Combo_Category.getSelectionModel().selectFirst();
         Combo_Category.setValue("");
@@ -170,6 +171,10 @@ public class NewExpense {
         Description.setText("");
     }
 
-
+    private ArrayList<Category> getCategory(){
+       ArrayList<Category> categories=user.getCategory();
+       categories.removeIf(category -> category.getName().equals("Income"));
+       return categories;
+    }
 
 }

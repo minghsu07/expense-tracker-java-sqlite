@@ -68,8 +68,8 @@ public class NewUserController {
         }else if(!passwd.equals(retrypasswd)) {
             alert.setContentText("Password doesn't match");
             alert.show();
-        }else if(username.length()>16){
-            alert.setContentText("The name cannot be longer than 16 characters.\nPlease enter a shorter name");
+        }else if(username.length()>10){
+            alert.setContentText("The name cannot be longer than 10 characters.\nPlease enter a shorter name");
             alert.show();
         }else{
             if(user.Singup(username,passwd,categories)){

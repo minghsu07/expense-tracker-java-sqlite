@@ -122,8 +122,13 @@
             </TableView>
          </children>
       </VBox>
-      <VBox alignment="TOP_CENTER" layoutX="870.0" layoutY="26.0" prefHeight="605.0" prefWidth="189.0">
+      <VBox alignment="TOP_CENTER" layoutX="870.0" layoutY="46.0" prefHeight="563.0" prefWidth="189.0">
          <children>
+            <Label fx:id="USERName" alignment="CENTER" prefHeight="22.0" prefWidth="196.0">
+               <font>
+                  <Font name="Cambria Bold" size="18.0" />
+               </font>
+            </Label>
             <VBox prefHeight="157.0" prefWidth="201.0">
                <children>
                   <Label text="Total Income" textFill="#433d3d">
@@ -164,7 +169,7 @@
                   </Label>
                </children>
                <VBox.margin>
-                  <Insets left="15.0" top="35.0" />
+                  <Insets left="15.0" top="25.0" />
                </VBox.margin>
             </VBox>
             <VBox alignment="CENTER" prefHeight="376.0" prefWidth="189.0" style="-fx-background-color: #FCF9F9;">

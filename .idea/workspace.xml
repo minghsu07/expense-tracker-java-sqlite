@@ -9,9 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="110aba21-2191-4ca8-a3dc-6fe61fcf0a74" name="Changes" comment="fix all month search issue">
+    <list default="true" id="110aba21-2191-4ca8-a3dc-6fe61fcf0a74" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/views/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/views/Main.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

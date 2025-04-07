@@ -444,12 +444,13 @@ public class MainController  {
         String query="select category_id, Concat(" +
                                             "upper(substring(category_name,1,1))," +
                                             "Lower(substring(category_name,2,Length(category_name)))" +
-                                            ") as Name from ex_category";
+                                            ") as Name from ex_category where user_id=?";
 
 
         try(Connection conn=user.getSQLConn().getConnection();
             PreparedStatement Prepstat=conn.prepareStatement(query))
         {
+            Prepstat.setInt(1,user.getUserId());
             ResultSet result=Prepstat.executeQuery();
 
             while(result.next()){
@@ -465,11 +466,12 @@ public class MainController  {
 
     private int getIncome_ID(){
 
-        String query="select category_id from ex_category where category_name=\"INCOME\"";
+        String query="select category_id from ex_category where category_name=\"INCOME\" and user_id=?";
 
         try(Connection conn=user.getSQLConn().getConnection();
                 PreparedStatement Prestat=conn.prepareStatement(query))
         {
+            Prestat.setInt(1,user.getUserId());
             ResultSet resultSet=Prestat.executeQuery();
             while(resultSet.next()){
                 Income_ID= resultSet.getInt("category_id");

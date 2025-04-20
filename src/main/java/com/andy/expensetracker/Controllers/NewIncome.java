@@ -58,7 +58,7 @@ public class NewIncome {
 
             String item=Item.getText();
             BigDecimal amount=new BigDecimal(Amount.getText().substring(1).toString());
-            int category_id=0;
+
             LocalDate date=SelectedDate.getValue();
             String formattedDate = date.toString();
             String desc="";
@@ -74,7 +74,7 @@ public class NewIncome {
             {
                 PreStat.setInt(1,user.getUserId());
                 PreStat.setString(2,item);
-                PreStat.setInt(3,getIncomeID());
+                PreStat.setInt(3,this.getIncomeID());
                 PreStat.setBigDecimal(4,amount);
                 PreStat.setString(5,formattedDate);
                 PreStat.setString(6,desc);
@@ -98,7 +98,7 @@ public class NewIncome {
     }
 
     private void setIncomeID(){
-        String query="SELECT CATEGORY_ID FROM EX_CATEGORY WHERE CATEGORY_NAME='Income' and user_id=?";
+        String query="SELECT CATEGORY_ID FROM EX_CATEGORY WHERE lower(CATEGORY_NAME)='income' and user_id=?";
         try(Connection conn=user.getSQLConn().getConnection();
             PreparedStatement stat=conn.prepareStatement(query)){
 

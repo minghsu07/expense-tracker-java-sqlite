@@ -464,23 +464,7 @@ public class MainController  {
         return categories;
     }
 
-    private int getIncome_ID(){
 
-        String query="select category_id from ex_category where category_name=\"INCOME\" and user_id=?";
-
-        try(Connection conn=user.getSQLConn().getConnection();
-                PreparedStatement Prestat=conn.prepareStatement(query))
-        {
-            Prestat.setInt(1,user.getUserId());
-            ResultSet resultSet=Prestat.executeQuery();
-            while(resultSet.next()){
-                Income_ID= resultSet.getInt("category_id");
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return Income_ID;
-    }
 
 
 

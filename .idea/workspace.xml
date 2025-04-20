@@ -9,8 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="110aba21-2191-4ca8-a3dc-6fe61fcf0a74" name="Changes" comment="">
+    <list default="true" id="110aba21-2191-4ca8-a3dc-6fe61fcf0a74" name="Changes" comment="fix: only retrieve the logined user's categories in main view">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Controllers/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Controllers/NewIncome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/andy/expensetracker/Controllers/NewIncome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/views/NewIncome.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/andy/expensetracker/views/NewIncome.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +168,8 @@
     <MESSAGE value="Delete unused line of code" />
     <MESSAGE value="Modify button style" />
     <MESSAGE value="Modify readme.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modify readme.md" />
+    <MESSAGE value="fix: only retrieve the logined user's categories in main view" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: only retrieve the logined user's categories in main view" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
